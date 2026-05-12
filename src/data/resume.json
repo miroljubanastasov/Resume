@@ -40,12 +40,24 @@
                     "level": 5
                 },
                 {
-                    "name": "Adobe Creative Suite",
+                    "name": "Python",
+                    "level": 5
+                },
+                {
+                    "name": "C# / .NET",
+                    "level": 5
+                },
+                {
+                    "name": "JavaScript / React",
                     "level": 4
                 },
                 {
                     "name": "Enscape",
                     "level": 5
+                },
+                {
+                    "name": "Adobe Creative Suite",
+                    "level": 4
                 }
             ]
         },
@@ -57,12 +69,12 @@
                     "level": 5
                 },
                 {
-                    "name": "Construction Documentation",
-                    "level": 5
+                    "name": "Computational Design & Scripting",
+                    "level": 3
                 },
                 {
-                    "name": "Project Management",
-                    "level": 4
+                    "name": "Construction Documentation",
+                    "level": 3
                 },
                 {
                     "name": "Sustainable / LEED Design",
