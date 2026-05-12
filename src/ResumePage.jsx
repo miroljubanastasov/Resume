@@ -238,7 +238,7 @@ export default function ResumePage({ data = resumeData }) {
             errorCorrectionLevel: 'M',
             margin: 1,
             width: 240,
-            color: { dark: '#FFFFFF', light: '#0a0a0a' },
+            color: { dark: '#FFFFFF', light: '#2d2d2d' },
         })
             .then((url) => {
                 if (!cancelled) setQrDataUrl(url);
@@ -377,7 +377,7 @@ export default function ResumePage({ data = resumeData }) {
                                         zIndex: 1,
                                         width: { xs: 56, sm: 72, md: 84 },
                                         height: { xs: 56, sm: 72, md: 84 },
-                                        bgcolor: '#0a0a0a',
+                                        bgcolor: '#2d2d2d',
                                         borderRadius: 1,
                                         p: 0.5,
                                         display: 'flex',
