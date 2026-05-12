@@ -29,7 +29,7 @@ const palette = {
         page: '#FFFFFF', // experience/education band
     },
     chip: {
-        main: '#2d2d2d', // dark gray for Strengths / CEFR badges
+        main: '#6e6e6e', // dark gray for Strengths / CEFR badges
         contrastText: '#FFFFFF',
     },
     text: {

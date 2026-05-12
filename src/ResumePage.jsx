@@ -166,18 +166,18 @@ function SkillBar({ label, level }) {
 function SkillCategory({ category, items }) {
     const hasLevels = items.some((i) => typeof i.level === 'number');
     return (
-        <Box sx={{ mb: 2.5, minWidth: 0 }}>
+        <Box sx={{ mb: 2.5, minWidth: 0, width: '100%', overflow: 'hidden' }}>
             <SectionTitle icon={CATEGORY_ICONS[category] ?? <BuildIcon sx={{ fontSize: 16 }} />}>
                 {category}
             </SectionTitle>
             {hasLevels ? (
                 items.map((it) => <SkillBar key={it.name} label={it.name} level={it.level ?? 0} />)
             ) : (
-                <Stack direction="row" flexWrap="wrap" gap={0.5} sx={{ maxWidth: '100%' }}>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, width: '100%' }}>
                     {items.map((it) => (
                         <Chip key={it.name} label={it.name} />
                     ))}
-                </Stack>
+                </Box>
             )}
         </Box>
     );
