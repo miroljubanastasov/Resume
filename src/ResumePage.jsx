@@ -416,7 +416,7 @@ export default function ResumePage({ data = resumeData }) {
             </Box>
 
             {/* ============ SKILLS + LANGUAGES band ============ */}
-            <Box sx={{ bgcolor: 'band.light', width: '100%', '@media print': PRINT_COLOR }}>
+            <Box sx={{ bgcolor: 'band.light', width: '100%', overflow: 'hidden', '@media print': PRINT_COLOR }}>
                 <Box
                     className="print-band"
                     sx={{
@@ -425,7 +425,7 @@ export default function ResumePage({ data = resumeData }) {
                         px: L.bandPadX,
                         py: L.bandPadY,
                         display: 'grid',
-                        gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' },
+                        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
                         gap: { xs: 3, md: 4 },
                         '@media print': { gridTemplateColumns: 'repeat(4, 1fr)', gap: 24, py: 24 },
                     }}
