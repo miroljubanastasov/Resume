@@ -12,19 +12,14 @@
     },
     "languages": [
         {
-            "name": "Language 1",
+            "name": "English",
             "level": 5,
-            "cefr": "C2"
+            "cefr": "Fluent"
         },
         {
-            "name": "Language 2",
-            "level": 4,
-            "cefr": "C1"
-        },
-        {
-            "name": "Language 3",
+            "name": "Deutsch",
             "level": 2,
-            "cefr": "A2"
+            "cefr": "Basic"
         }
     ],
     "skills": [
@@ -70,7 +65,7 @@
                 },
                 {
                     "name": "Computational Design & Scripting",
-                    "level": 3
+                    "level": 5
                 },
                 {
                     "name": "Construction Documentation",
@@ -96,10 +91,10 @@
                     "name": "Creativity"
                 },
                 {
-                    "name": "Detail-oriented"
+                    "name": "Problem Solving"
                 },
                 {
-                    "name": "Communication"
+                    "name": "Innovative"
                 },
                 {
                     "name": "Mentoring"
@@ -109,10 +104,10 @@
     ],
     "experience": [
         {
-            "period": "2022 — PRESENT",
-            "title": "[ Senior / Principal Architect ]",
-            "organization": "[ Company / Studio name ]",
-            "location": "[ City, Country ]",
+            "period": "2024 — PRESENT",
+            "title": "Principal Architect/ Advanced technology lead",
+            "organization": "Dbom",
+            "location": "Remote, Germany",
             "bullets": [
                 "[ Key responsibility — lead design teams across N projects ]",
                 "[ Notable project or scope — building type, m², budget ]",
@@ -120,10 +115,10 @@
             ]
         },
         {
-            "period": "2017 — 2022",
-            "title": "[ Project Architect ]",
-            "organization": "[ Company / Studio name ]",
-            "location": "[ City, Country ]",
+            "period": "2022 — 2024",
+            "title": "Principle Architect/ Computational Designer",
+            "organization": "AXXIS",
+            "location": "Serbia",
             "bullets": [
                 "[ Delivered N projects from concept through construction ]",
                 "[ Coordinated with engineering disciplines and contractors ]",
@@ -131,10 +126,10 @@
             ]
         },
         {
-            "period": "2013 — 2017",
-            "title": "[ Architect ]",
-            "organization": "[ Company / Studio name ]",
-            "location": "[ City, Country ]",
+            "period": "2017 — 2022",
+            "title": "Architect, Senior Associate",
+            "organization": "Aedas",
+            "location": "Dubai, United Arab Emirates",
             "bullets": [
                 "[ Concept design, technical drawings, permit packages ]",
                 "[ On-site supervision and client communication ]"
