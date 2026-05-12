@@ -1,4 +1,4 @@
-import { Box, Chip, LinearProgress, Stack, Typography } from '@mui/material';
+import { Box, Chip, LinearProgress, Stack, Typography, useTheme } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -13,23 +13,22 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PersonIcon from '@mui/icons-material/Person';
 import resumeData from './data/resume.json';
 
-const HERO_BG = '#0F0F10';
-const HERO_FG = '#FFFFFF';
-const ACCENT = '#C9A24B'; // warm gold accent on black
-const MUTED_BG = '#F4F4F2';
-const TEXT_DARK = '#1A1A1A';
-
 const CATEGORY_ICONS = {
     Software: <BuildIcon sx={{ fontSize: 16 }} />,
     Professional: <WorkIcon sx={{ fontSize: 16 }} />,
     Strengths: <EmojiEventsIcon sx={{ fontSize: 16 }} />,
 };
 
+const PRINT_COLOR = {
+    WebkitPrintColorAdjust: 'exact',
+    printColorAdjust: 'exact',
+};
+
 /* ---------------- Shared atoms ---------------- */
 
 function SectionTitle({ icon, children, dark }) {
     return (
-        <Stack direction="row" spacing={1.2} alignItems="center" sx={{ mb: 1.5, mt: 0 }}>
+        <Stack direction="row" spacing={1.2} alignItems="center" sx={{ mb: 1.5 }}>
             <Box
                 sx={{
                     width: 28,
@@ -38,8 +37,8 @@ function SectionTitle({ icon, children, dark }) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    bgcolor: ACCENT,
-                    color: '#000',
+                    bgcolor: 'accent.main',
+                    color: 'accent.contrastText',
                 }}
             >
                 {icon}
@@ -47,9 +46,7 @@ function SectionTitle({ icon, children, dark }) {
             <Typography
                 variant="overline"
                 sx={{
-                    fontWeight: 800,
-                    letterSpacing: 3,
-                    color: dark ? HERO_FG : TEXT_DARK,
+                    color: dark ? 'hero.fg' : 'text.primary',
                     fontSize: '0.82rem',
                 }}
             >
@@ -70,19 +67,11 @@ function ContactRow({ icon, value, dark }) {
     if (!value) return null;
     return (
         <Stack direction="row" spacing={1.2} alignItems="center" sx={{ mb: 0.6 }}>
-            <Box
-                sx={{
-                    color: dark ? ACCENT : ACCENT,
-                    display: 'flex',
-                    alignItems: 'center',
-                }}
-            >
-                {icon}
-            </Box>
+            <Box sx={{ color: 'accent.main', display: 'flex', alignItems: 'center' }}>{icon}</Box>
             <Typography
                 variant="body2"
                 sx={{
-                    color: dark ? 'rgba(255,255,255,0.9)' : TEXT_DARK,
+                    color: dark ? 'hero.fgMuted' : 'text.primary',
                     fontSize: '0.82rem',
                     wordBreak: 'break-word',
                 }}
@@ -104,7 +93,7 @@ function TimelineItem({ period, title, subtitle, location, bullets }) {
                     width: 10,
                     height: 10,
                     borderRadius: '50%',
-                    bgcolor: ACCENT,
+                    bgcolor: 'accent.main',
                 }}
             />
             <Box
@@ -119,7 +108,7 @@ function TimelineItem({ period, title, subtitle, location, bullets }) {
             />
             <Typography
                 variant="caption"
-                sx={{ color: '#7a6224', fontWeight: 800, letterSpacing: 1.5 }}
+                sx={{ color: 'accent.soft', fontWeight: 800, letterSpacing: 1.5 }}
             >
                 {period}
             </Typography>
@@ -152,23 +141,14 @@ function SkillBar({ label, level }) {
     return (
         <Box sx={{ mb: 1.1 }}>
             <Stack direction="row" justifyContent="space-between" sx={{ mb: 0.3 }}>
-                <Typography variant="body2" sx={{ color: TEXT_DARK, fontSize: '0.82rem' }}>
+                <Typography variant="body2" sx={{ fontSize: '0.82rem' }}>
                     {label}
                 </Typography>
                 <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                     {level}/5
                 </Typography>
             </Stack>
-            <LinearProgress
-                variant="determinate"
-                value={(level / 5) * 100}
-                sx={{
-                    height: 6,
-                    borderRadius: 3,
-                    bgcolor: 'rgba(0,0,0,0.08)',
-                    '& .MuiLinearProgress-bar': { bgcolor: ACCENT },
-                }}
-            />
+            <LinearProgress variant="determinate" value={(level / 5) * 100} />
         </Box>
     );
 }
@@ -177,9 +157,7 @@ function SkillCategory({ category, items }) {
     const hasLevels = items.some((i) => typeof i.level === 'number');
     return (
         <Box sx={{ mb: 2.5 }}>
-            <SectionTitle
-                icon={CATEGORY_ICONS[category] ?? <BuildIcon sx={{ fontSize: 16 }} />}
-            >
+            <SectionTitle icon={CATEGORY_ICONS[category] ?? <BuildIcon sx={{ fontSize: 16 }} />}>
                 {category}
             </SectionTitle>
             {hasLevels ? (
@@ -190,13 +168,7 @@ function SkillCategory({ category, items }) {
                         <Chip
                             key={it.name}
                             label={it.name}
-                            size="small"
-                            sx={{
-                                bgcolor: '#000',
-                                color: HERO_FG,
-                                fontSize: '0.72rem',
-                                fontWeight: 600,
-                            }}
+                            sx={{ bgcolor: 'secondary.main', color: 'secondary.contrastText' }}
                         />
                     ))}
                 </Stack>
@@ -209,15 +181,14 @@ function LanguageRow({ label, level, cefr }) {
     return (
         <Box sx={{ mb: 1.1 }}>
             <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Typography variant="body2" sx={{ color: TEXT_DARK, fontSize: '0.82rem' }}>
+                <Typography variant="body2" sx={{ fontSize: '0.82rem' }}>
                     {label}
                 </Typography>
                 <Chip
                     label={cefr}
-                    size="small"
                     sx={{
-                        bgcolor: '#000',
-                        color: HERO_FG,
+                        bgcolor: 'secondary.main',
+                        color: 'secondary.contrastText',
                         height: 20,
                         fontSize: '0.7rem',
                         fontWeight: 700,
@@ -232,7 +203,7 @@ function LanguageRow({ label, level, cefr }) {
                             flex: 1,
                             height: 4,
                             borderRadius: 1,
-                            bgcolor: i <= level ? ACCENT : 'rgba(0,0,0,0.1)',
+                            bgcolor: i <= level ? 'accent.main' : 'rgba(0,0,0,0.1)',
                         }}
                     />
                 ))}
@@ -247,12 +218,13 @@ export default function ResumePage({ data = resumeData }) {
     const { personal, languages, skills, experience, education } = data;
     const { contact } = personal;
 
-    const CONTENT_MAX = 1200;
+    const theme = useTheme();
+    const L = theme.resume.layout;
 
     return (
         <Box
             sx={{
-                bgcolor: '#fff',
+                bgcolor: 'band.page',
                 minHeight: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
@@ -261,22 +233,19 @@ export default function ResumePage({ data = resumeData }) {
             {/* ============ HERO (full-bleed) ============ */}
             <Box
                 sx={{
-                    bgcolor: HERO_BG,
-                    color: HERO_FG,
+                    bgcolor: 'hero.bg',
+                    color: 'hero.fg',
                     width: '100%',
-                    '@media print': {
-                        WebkitPrintColorAdjust: 'exact',
-                        printColorAdjust: 'exact',
-                    },
+                    '@media print': PRINT_COLOR,
                 }}
             >
                 <Box
                     sx={{
-                        maxWidth: CONTENT_MAX,
+                        maxWidth: L.contentMaxWidth,
                         mx: 'auto',
                         display: 'grid',
                         gridTemplateColumns: { xs: '1fr', sm: '1.15fr 1fr' },
-                        minHeight: { sm: 460 },
+                        minHeight: L.heroMinHeight,
                         '@media print': { gridTemplateColumns: '1.15fr 1fr', minHeight: 0 },
                     }}
                 >
@@ -291,22 +260,14 @@ export default function ResumePage({ data = resumeData }) {
                     >
                         <Typography
                             variant="overline"
-                            sx={{
-                                color: ACCENT,
-                                letterSpacing: 4,
-                                fontWeight: 700,
-                                fontSize: '0.78rem',
-                            }}
+                            sx={{ color: 'accent.main', letterSpacing: 4, fontSize: '0.78rem' }}
                         >
                             {personal.title}
                         </Typography>
                         <Typography
                             variant="h2"
                             sx={{
-                                fontWeight: 800,
-                                lineHeight: 1.05,
-                                letterSpacing: '-0.5px',
-                                color: HERO_FG,
+                                color: 'hero.fg',
                                 mt: 1,
                                 mb: 2.5,
                                 fontSize: { xs: '2.2rem', sm: '3rem', md: '3.4rem' },
@@ -315,11 +276,18 @@ export default function ResumePage({ data = resumeData }) {
                             {personal.fullName}
                         </Typography>
 
-                        <Box sx={{ width: 64, height: 3, bgcolor: ACCENT, mb: 2.5 }} />
+                        <Box
+                            sx={{
+                                width: L.sectionRuleWidth,
+                                height: L.sectionRuleHeight,
+                                bgcolor: 'accent.main',
+                                mb: 2.5,
+                            }}
+                        />
 
                         <Typography
                             sx={{
-                                color: 'rgba(255,255,255,0.78)',
+                                color: 'hero.fgMuted',
                                 lineHeight: 1.7,
                                 mb: 3,
                                 fontSize: { xs: '0.9rem', md: '0.98rem' },
@@ -348,12 +316,8 @@ export default function ResumePage({ data = resumeData }) {
                             backgroundSize: 'cover',
                             backgroundPosition: 'center top',
                             backgroundRepeat: 'no-repeat',
-                            bgcolor: '#222',
-                            '@media print': {
-                                WebkitPrintColorAdjust: 'exact',
-                                printColorAdjust: 'exact',
-                                minHeight: 0,
-                            },
+                            bgcolor: 'hero.photoBg',
+                            '@media print': { ...PRINT_COLOR, minHeight: 0 },
                         }}
                     >
                         {!personal.photo && (
@@ -374,31 +338,18 @@ export default function ResumePage({ data = resumeData }) {
                 </Box>
             </Box>
 
-            {/* ============ SKILLS + LANGUAGES band (full-bleed gray) ============ */}
-            <Box
-                sx={{
-                    bgcolor: MUTED_BG,
-                    width: '100%',
-                    '@media print': {
-                        WebkitPrintColorAdjust: 'exact',
-                        printColorAdjust: 'exact',
-                    },
-                }}
-            >
+            {/* ============ SKILLS + LANGUAGES band ============ */}
+            <Box sx={{ bgcolor: 'band.light', width: '100%', '@media print': PRINT_COLOR }}>
                 <Box
                     sx={{
-                        maxWidth: CONTENT_MAX,
+                        maxWidth: L.contentMaxWidth,
                         mx: 'auto',
-                        px: { xs: 3, sm: 6, md: 8 },
-                        py: { xs: 4, sm: 6 },
+                        px: L.bandPadX,
+                        py: L.bandPadY,
                         display: 'grid',
                         gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' },
                         gap: { xs: 3, md: 4 },
-                        '@media print': {
-                            gridTemplateColumns: 'repeat(4, 1fr)',
-                            gap: 24,
-                            py: 24,
-                        },
+                        '@media print': { gridTemplateColumns: 'repeat(4, 1fr)', gap: 24, py: 24 },
                     }}
                 >
                     {skills?.map((group) => (
@@ -417,22 +368,18 @@ export default function ResumePage({ data = resumeData }) {
                 </Box>
             </Box>
 
-            {/* ============ EXPERIENCE + EDUCATION band (full-bleed white) ============ */}
-            <Box sx={{ width: '100%', bgcolor: '#fff' }}>
+            {/* ============ EXPERIENCE + EDUCATION band ============ */}
+            <Box sx={{ width: '100%', bgcolor: 'band.page' }}>
                 <Box
                     sx={{
-                        maxWidth: CONTENT_MAX,
+                        maxWidth: L.contentMaxWidth,
                         mx: 'auto',
-                        px: { xs: 3, sm: 6, md: 8 },
-                        py: { xs: 4, sm: 6 },
+                        px: L.bandPadX,
+                        py: L.bandPadY,
                         display: 'grid',
                         gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
                         gap: { xs: 4, md: 6 },
-                        '@media print': {
-                            gridTemplateColumns: '1fr 1fr',
-                            gap: 32,
-                            py: 24,
-                        },
+                        '@media print': { gridTemplateColumns: '1fr 1fr', gap: 32, py: 24 },
                     }}
                 >
                     <Box>
@@ -470,9 +417,7 @@ export default function ResumePage({ data = resumeData }) {
             {/* Print styling */}
             <style>{`
         @page { size: A4; margin: 0; }
-        @media print {
-          body { margin: 0; }
-        }
+        @media print { body { margin: 0; } }
       `}</style>
         </Box>
     );
