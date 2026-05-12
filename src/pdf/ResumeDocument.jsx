@@ -78,7 +78,7 @@ function makeSheet(c) {
             width: 56,
             height: 56,
             padding: 3,
-            backgroundColor: '#2d2d2d',
+            backgroundColor: '#0a0a0a',
             borderRadius: 3,
         },
         heroQrImage: {

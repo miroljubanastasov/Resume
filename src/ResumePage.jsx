@@ -238,7 +238,7 @@ export default function ResumePage({ data = resumeData }) {
             errorCorrectionLevel: 'M',
             margin: 1,
             width: 240,
-            color: { dark: '#FFFFFF', light: '#2d2d2d' },
+            color: { dark: '#FFFFFF', light: '#0a0a0a' },
         })
             .then((url) => {
                 if (!cancelled) setQrDataUrl(url);
@@ -377,13 +377,13 @@ export default function ResumePage({ data = resumeData }) {
                                         zIndex: 1,
                                         width: { xs: 56, sm: 72, md: 84 },
                                         height: { xs: 56, sm: 72, md: 84 },
-                                        bgcolor: '#2d2d2d',
+                                        bgcolor: '#0a0a0a',
                                         borderRadius: 1,
                                         p: 0.5,
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        boxShadow: '0 4px 16px rgba(0,0,0,0.35)',
+                                        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.35)',
                                         textDecoration: 'none',
                                         '@media print': { ...PRINT_COLOR, boxShadow: 'none' },
                                     }}
@@ -416,10 +416,11 @@ export default function ResumePage({ data = resumeData }) {
             </Box>
 
             {/* ============ SKILLS + LANGUAGES band ============ */}
-            <Box sx={{ bgcolor: 'band.light', width: '100%', '@media print': PRINT_COLOR }}>
+            <Box sx={{ width: '100%', '@media print': PRINT_COLOR }}>
                 <Box
                     className="print-band"
                     sx={{
+                        bgcolor: 'band.light',
                         maxWidth: L.contentMaxWidth,
                         mx: 'auto',
                         px: L.bandPadX,
@@ -447,10 +448,11 @@ export default function ResumePage({ data = resumeData }) {
             </Box>
 
             {/* ============ EXPERIENCE + EDUCATION band ============ */}
-            <Box sx={{ width: '100%', bgcolor: 'band.page' }}>
+            <Box sx={{ width: '100%' }}>
                 <Box
                     className="print-band"
                     sx={{
+                        bgcolor: 'band.page',
                         maxWidth: L.contentMaxWidth,
                         mx: 'auto',
                         px: L.bandPadX,
