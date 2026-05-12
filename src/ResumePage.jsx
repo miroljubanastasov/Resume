@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import QRCode from 'qrcode';
 import { Box, Chip, CircularProgress, Fab, LinearProgress, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -12,7 +13,6 @@ import BuildIcon from '@mui/icons-material/Build';
 import TranslateIcon from '@mui/icons-material/Translate';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PersonIcon from '@mui/icons-material/Person';
-import PrintIcon from '@mui/icons-material/Print';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import resumeData from './data/resume.json';
 
@@ -118,7 +118,7 @@ function TimelineItem({ period, title, subtitle, location, bullets }) {
             <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.2 }}>
                 {title}
             </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary', mb: 0.5 }}>
+            <Typography variant="body2" sx={{ color: 'accent.soft', mb: 0.5 }}>
                 {subtitle}
                 {location && (
                     <Box component="span" sx={{ ml: 1 }}>
@@ -228,12 +228,33 @@ export default function ResumePage({ data = resumeData }) {
         : null;
 
     const [pdfBusy, setPdfBusy] = useState(false);
+    const [qrDataUrl, setQrDataUrl] = useState(null);
+    const qrTarget = contact?.website;
+
+    useEffect(() => {
+        if (!qrTarget) return;
+        let cancelled = false;
+        QRCode.toDataURL(qrTarget, {
+            errorCorrectionLevel: 'M',
+            margin: 1,
+            width: 240,
+            color: { dark: '#000000', light: '#FFFFFF' },
+        })
+            .then((url) => {
+                if (!cancelled) setQrDataUrl(url);
+            })
+            .catch((err) => console.error('QR generation failed', err));
+        return () => {
+            cancelled = true;
+        };
+    }, [qrTarget]);
+
     const handleDownloadPdf = async () => {
         if (pdfBusy) return;
         setPdfBusy(true);
         try {
             const { exportResumePdf } = await import('./pdf/exportResumePdf.jsx');
-            await exportResumePdf({ data, theme, photoUrl });
+            await exportResumePdf({ data, theme, photoUrl, qrDataUrl });
         } catch (err) {
             console.error('PDF export failed', err);
         } finally {
@@ -273,12 +294,46 @@ export default function ResumePage({ data = resumeData }) {
                     {/* Hero LEFT: info on black */}
                     <Box
                         sx={{
+                            position: 'relative',
                             p: { xs: 4, sm: 6, md: 8 },
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'center',
                         }}
                     >
+                        {qrDataUrl && (
+                            <Tooltip title={qrTarget} placement="left">
+                                <Box
+                                    component="a"
+                                    href={qrTarget}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    sx={{
+                                        position: 'absolute',
+                                        top: { xs: 16, sm: 24, md: 32 },
+                                        right: { xs: 16, sm: 24, md: 32 },
+                                        width: { xs: 56, sm: 72, md: 84 },
+                                        height: { xs: 56, sm: 72, md: 84 },
+                                        bgcolor: '#FFFFFF',
+                                        borderRadius: 1,
+                                        p: 0.5,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        boxShadow: '0 4px 16px rgba(0,0,0,0.35)',
+                                        textDecoration: 'none',
+                                        '@media print': { ...PRINT_COLOR, boxShadow: 'none' },
+                                    }}
+                                >
+                                    <Box
+                                        component="img"
+                                        src={qrDataUrl}
+                                        alt="QR code linking to online CV"
+                                        sx={{ width: '100%', height: '100%', display: 'block' }}
+                                    />
+                                </Box>
+                            </Tooltip>
+                        )}
                         <Typography
                             variant="overline"
                             sx={{ color: 'accent.main', letterSpacing: 4, fontSize: '0.78rem' }}
@@ -422,7 +477,7 @@ export default function ResumePage({ data = resumeData }) {
 
                     <Box>
                         <SectionTitle icon={<SchoolIcon sx={{ fontSize: 16 }} />}>
-                            Education & training
+                            Education & Certificates
                         </SectionTitle>
                         {education.map((e, idx) => (
                             <TimelineItem
@@ -459,16 +514,7 @@ export default function ResumePage({ data = resumeData }) {
                         )}
                     </Fab>
                 </Tooltip>
-                <Tooltip title="Print (browser dialog)" placement="left">
-                    <Fab
-                        size="small"
-                        aria-label="print"
-                        onClick={() => window.print()}
-                        sx={{ bgcolor: 'hero.bg', color: 'hero.fg', '&:hover': { bgcolor: '#1a1a1a' } }}
-                    >
-                        <PrintIcon />
-                    </Fab>
-                </Tooltip>
+
             </Stack>
         </Box>
     );

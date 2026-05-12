@@ -20,7 +20,7 @@ const palette = {
         photoBg: '#0c0c0c',
     },
     accent: {
-        main: '#4bc5c9', // warm gold
+        main: '#30bbc0', // warm gold
         contrastText: '#ffffff',
         soft: '#2b8b9c', // darker variant for period labels on light bg
     },

@@ -70,6 +70,21 @@ function makeSheet(c) {
             flex: 1.15,
             padding: 24,
             justifyContent: 'center',
+            position: 'relative',
+        },
+        heroQr: {
+            position: 'absolute',
+            top: 18,
+            right: 18,
+            width: 56,
+            height: 56,
+            padding: 3,
+            backgroundColor: '#FFFFFF',
+            borderRadius: 3,
+        },
+        heroQrImage: {
+            width: '100%',
+            height: '100%',
         },
         heroRight: {
             flex: 1,
@@ -383,7 +398,7 @@ function TimelineItem({ period, title, organization, location, bullets, styles }
 
 /* ---------------- document ---------------- */
 
-export default function ResumeDocument({ data, theme, photoUrl }) {
+export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
     const colors = buildPdfStyles(theme);
     const styles = makeSheet(colors);
     const { personal, languages, skills, experience, education } = data;
@@ -408,6 +423,11 @@ export default function ResumeDocument({ data, theme, photoUrl }) {
                 {/* HERO */}
                 <View style={styles.hero}>
                     <View style={styles.heroLeft}>
+                        {qrDataUrl && (
+                            <View style={styles.heroQr}>
+                                <Image src={qrDataUrl} style={styles.heroQrImage} />
+                            </View>
+                        )}
                         <Text style={styles.title}>{personal.title}</Text>
                         <Text style={styles.name}>{personal.fullName}</Text>
                         <View style={styles.rule} />
