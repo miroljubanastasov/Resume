@@ -186,7 +186,7 @@ function SkillCategory({ category, items }) {
 function LanguageRow({ label, level, cefr }) {
     return (
         <Box sx={{ mb: 1.4 }}>
-            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 0.5, width: '100%' }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'center', mb: 0.5 }}>
                 <Typography variant="body2" sx={{ fontSize: '0.82rem' }}>
                     {label}
                 </Typography>
@@ -196,10 +196,10 @@ function LanguageRow({ label, level, cefr }) {
                         height: 18,
                         fontSize: '0.68rem',
                         fontWeight: 700,
-                        flexShrink: 0,
+                        justifySelf: 'end',
                     }}
                 />
-            </Stack>
+            </Box>
             <Stack direction="row" spacing={0.5}>
                 {[1, 2, 3, 4, 5].map((i) => (
                     <Box
