@@ -205,13 +205,11 @@ function makeSheet(c) {
             marginRight: 4,
             marginBottom: 4,
         },
-        langRow: { marginBottom: 6 },
-        langNameRow: {
-            marginBottom: 2,
-        },
-        langChipRow: {
+        langRow: { marginBottom: 7 },
+        langTopRow: {
             flexDirection: 'row',
-            justifyContent: 'flex-end',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             marginBottom: 3,
         },
         langDots: { flexDirection: 'row' },
@@ -365,8 +363,8 @@ function SkillCategory({ category, items, styles, colors }) {
 function LanguageRow({ name, level, cefr, styles, colors }) {
     return (
         <View style={styles.langRow}>
-            <Text style={[styles.skillName, styles.langNameRow]}>{name}</Text>
-            <View style={styles.langChipRow}>
+            <View style={styles.langTopRow}>
+                <Text style={styles.skillName}>{name}</Text>
                 <Text style={styles.cefrChip}>{cefr}</Text>
             </View>
             <View style={styles.langDots}>
