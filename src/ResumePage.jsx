@@ -220,6 +220,9 @@ export default function ResumePage({ data = resumeData }) {
 
     const theme = useTheme();
     const L = theme.resume.layout;
+    const photoUrl = personal.photo
+        ? `${import.meta.env.BASE_URL}${personal.photo}`
+        : null;
 
     return (
         <Box
@@ -312,7 +315,7 @@ export default function ResumePage({ data = resumeData }) {
                         sx={{
                             position: 'relative',
                             minHeight: { xs: 320, sm: 'auto' },
-                            backgroundImage: personal.photo ? `url("${personal.photo}")` : 'none',
+                            backgroundImage: photoUrl ? `url("${photoUrl}")` : 'none',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center top',
                             backgroundRepeat: 'no-repeat',
@@ -320,7 +323,7 @@ export default function ResumePage({ data = resumeData }) {
                             '@media print': { ...PRINT_COLOR, minHeight: 0 },
                         }}
                     >
-                        {!personal.photo && (
+                        {!photoUrl && (
                             <Box
                                 sx={{
                                     position: 'absolute',
