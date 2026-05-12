@@ -247,96 +247,89 @@ export default function ResumePage({ data = resumeData }) {
     const { personal, languages, skills, experience, education } = data;
     const { contact } = personal;
 
+    const CONTENT_MAX = 1200;
+
     return (
         <Box
             sx={{
-                bgcolor: { xs: '#fff', sm: '#eceff1' },
+                bgcolor: '#fff',
                 minHeight: '100vh',
-                py: { xs: 0, sm: 4 },
-                '@media print': { bgcolor: '#fff', py: 0 },
+                display: 'flex',
+                flexDirection: 'column',
             }}
         >
+            {/* ============ HERO (full-bleed) ============ */}
             <Box
-                className="cv-page"
                 sx={{
-                    width: { xs: '100%', sm: '210mm' },
-                    minHeight: { sm: '297mm' },
-                    mx: 'auto',
-                    bgcolor: '#fff',
-                    boxShadow: { xs: 'none', sm: 3 },
-                    display: 'flex',
-                    flexDirection: 'column',
+                    bgcolor: HERO_BG,
+                    color: HERO_FG,
+                    width: '100%',
                     '@media print': {
-                        width: '210mm',
-                        minHeight: '297mm',
-                        boxShadow: 'none',
+                        WebkitPrintColorAdjust: 'exact',
+                        printColorAdjust: 'exact',
                     },
                 }}
             >
-                {/* ============ HERO ============ */}
                 <Box
                     sx={{
+                        maxWidth: CONTENT_MAX,
+                        mx: 'auto',
                         display: 'grid',
                         gridTemplateColumns: { xs: '1fr', sm: '1.15fr 1fr' },
-                        bgcolor: HERO_BG,
-                        color: HERO_FG,
-                        '@media print': {
-                            WebkitPrintColorAdjust: 'exact',
-                            printColorAdjust: 'exact',
-                            gridTemplateColumns: '1.15fr 1fr',
-                        },
+                        minHeight: { sm: 460 },
+                        '@media print': { gridTemplateColumns: '1.15fr 1fr', minHeight: 0 },
                     }}
                 >
                     {/* Hero LEFT: info on black */}
-                    <Box sx={{ p: { xs: 3, sm: 4.5 }, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <Box
+                        sx={{
+                            p: { xs: 4, sm: 6, md: 8 },
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                        }}
+                    >
                         <Typography
                             variant="overline"
                             sx={{
                                 color: ACCENT,
                                 letterSpacing: 4,
                                 fontWeight: 700,
-                                fontSize: '0.75rem',
+                                fontSize: '0.78rem',
                             }}
                         >
                             {personal.title}
                         </Typography>
                         <Typography
-                            variant="h3"
+                            variant="h2"
                             sx={{
                                 fontWeight: 800,
                                 lineHeight: 1.05,
                                 letterSpacing: '-0.5px',
                                 color: HERO_FG,
-                                mt: 0.5,
-                                mb: 2,
-                                fontSize: { xs: '2rem', sm: '2.6rem' },
+                                mt: 1,
+                                mb: 2.5,
+                                fontSize: { xs: '2.2rem', sm: '3rem', md: '3.4rem' },
                             }}
                         >
                             {personal.fullName}
                         </Typography>
 
-                        <Box
-                            sx={{
-                                width: 56,
-                                height: 3,
-                                bgcolor: ACCENT,
-                                mb: 2,
-                            }}
-                        />
+                        <Box sx={{ width: 64, height: 3, bgcolor: ACCENT, mb: 2.5 }} />
 
                         <Typography
-                            variant="body2"
                             sx={{
                                 color: 'rgba(255,255,255,0.78)',
-                                lineHeight: 1.65,
-                                mb: 2.5,
-                                fontSize: '0.85rem',
+                                lineHeight: 1.7,
+                                mb: 3,
+                                fontSize: { xs: '0.9rem', md: '0.98rem' },
+                                maxWidth: 560,
                             }}
                         >
                             {personal.summary}
                         </Typography>
 
-                        <Stack spacing={0.2}>
+                        <Stack spacing={0.4}>
                             <ContactRow icon={<PhoneIcon fontSize="small" />} value={contact.phone} dark />
                             <ContactRow icon={<EmailIcon fontSize="small" />} value={contact.email} dark />
                             <ContactRow icon={<LocationOnIcon fontSize="small" />} value={contact.address} dark />
@@ -350,7 +343,7 @@ export default function ResumePage({ data = resumeData }) {
                     <Box
                         sx={{
                             position: 'relative',
-                            minHeight: { xs: 280, sm: 'auto' },
+                            minHeight: { xs: 320, sm: 'auto' },
                             backgroundImage: personal.photo ? `url("${personal.photo}")` : 'none',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center top',
@@ -359,6 +352,7 @@ export default function ResumePage({ data = resumeData }) {
                             '@media print': {
                                 WebkitPrintColorAdjust: 'exact',
                                 printColorAdjust: 'exact',
+                                minHeight: 0,
                             },
                         }}
                     >
@@ -373,53 +367,76 @@ export default function ResumePage({ data = resumeData }) {
                                     color: 'rgba(255,255,255,0.3)',
                                 }}
                             >
-                                <PersonIcon sx={{ fontSize: 120 }} />
+                                <PersonIcon sx={{ fontSize: 140 }} />
                             </Box>
                         )}
                     </Box>
                 </Box>
+            </Box>
 
-                {/* ============ BODY (two columns) ============ */}
+            {/* ============ SKILLS + LANGUAGES band (full-bleed gray) ============ */}
+            <Box
+                sx={{
+                    bgcolor: MUTED_BG,
+                    width: '100%',
+                    '@media print': {
+                        WebkitPrintColorAdjust: 'exact',
+                        printColorAdjust: 'exact',
+                    },
+                }}
+            >
                 <Box
                     sx={{
-                        flex: 1,
+                        maxWidth: CONTENT_MAX,
+                        mx: 'auto',
+                        px: { xs: 3, sm: 6, md: 8 },
+                        py: { xs: 4, sm: 6 },
                         display: 'grid',
-                        gridTemplateColumns: { xs: '1fr', md: '1fr 1.7fr' },
-                        '@media print': { gridTemplateColumns: '1fr 1.7fr' },
+                        gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' },
+                        gap: { xs: 3, md: 4 },
+                        '@media print': {
+                            gridTemplateColumns: 'repeat(4, 1fr)',
+                            gap: 24,
+                            py: 24,
+                        },
                     }}
                 >
-                    {/* Body LEFT: skills + languages */}
-                    <Box
-                        sx={{
-                            bgcolor: MUTED_BG,
-                            p: { xs: 3, sm: 3.5 },
-                            '@media print': {
-                                WebkitPrintColorAdjust: 'exact',
-                                printColorAdjust: 'exact',
-                            },
-                        }}
-                    >
-                        {skills?.map((group) => (
-                            <SkillCategory key={group.category} category={group.category} items={group.items} />
-                        ))}
+                    {skills?.map((group) => (
+                        <SkillCategory key={group.category} category={group.category} items={group.items} />
+                    ))}
+                    {languages && languages.length > 0 && (
+                        <Box>
+                            <SectionTitle icon={<TranslateIcon sx={{ fontSize: 16 }} />}>
+                                Languages
+                            </SectionTitle>
+                            {languages.map((l) => (
+                                <LanguageRow key={l.name} label={l.name} level={l.level} cefr={l.cefr} />
+                            ))}
+                        </Box>
+                    )}
+                </Box>
+            </Box>
 
-                        {languages && languages.length > 0 && (
-                            <Box>
-                                <SectionTitle icon={<TranslateIcon sx={{ fontSize: 16 }} />}>
-                                    Languages
-                                </SectionTitle>
-                                {languages.map((l) => (
-                                    <LanguageRow key={l.name} label={l.name} level={l.level} cefr={l.cefr} />
-                                ))}
-                            </Box>
-                        )}
-                    </Box>
-
-                    {/* Body RIGHT: experience + education */}
-                    <Box sx={{ p: { xs: 3, sm: 4 } }}>
-                        <SectionTitle icon={<WorkIcon sx={{ fontSize: 16 }} />}>
-                            Work experience
-                        </SectionTitle>
+            {/* ============ EXPERIENCE + EDUCATION band (full-bleed white) ============ */}
+            <Box sx={{ width: '100%', bgcolor: '#fff' }}>
+                <Box
+                    sx={{
+                        maxWidth: CONTENT_MAX,
+                        mx: 'auto',
+                        px: { xs: 3, sm: 6, md: 8 },
+                        py: { xs: 4, sm: 6 },
+                        display: 'grid',
+                        gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+                        gap: { xs: 4, md: 6 },
+                        '@media print': {
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: 32,
+                            py: 24,
+                        },
+                    }}
+                >
+                    <Box>
+                        <SectionTitle icon={<WorkIcon sx={{ fontSize: 16 }} />}>Work experience</SectionTitle>
                         {experience.map((e, idx) => (
                             <TimelineItem
                                 key={idx}
@@ -430,22 +447,22 @@ export default function ResumePage({ data = resumeData }) {
                                 bullets={e.bullets}
                             />
                         ))}
+                    </Box>
 
-                        <Box sx={{ mt: 2 }}>
-                            <SectionTitle icon={<SchoolIcon sx={{ fontSize: 16 }} />}>
-                                Education & training
-                            </SectionTitle>
-                            {education.map((e, idx) => (
-                                <TimelineItem
-                                    key={idx}
-                                    period={e.period}
-                                    title={e.title}
-                                    subtitle={e.organization}
-                                    location={e.location}
-                                    bullets={e.bullets}
-                                />
-                            ))}
-                        </Box>
+                    <Box>
+                        <SectionTitle icon={<SchoolIcon sx={{ fontSize: 16 }} />}>
+                            Education & training
+                        </SectionTitle>
+                        {education.map((e, idx) => (
+                            <TimelineItem
+                                key={idx}
+                                period={e.period}
+                                title={e.title}
+                                subtitle={e.organization}
+                                location={e.location}
+                                bullets={e.bullets}
+                            />
+                        ))}
                     </Box>
                 </Box>
             </Box>
@@ -455,7 +472,6 @@ export default function ResumePage({ data = resumeData }) {
         @page { size: A4; margin: 0; }
         @media print {
           body { margin: 0; }
-          .cv-page { page-break-after: always; }
         }
       `}</style>
         </Box>

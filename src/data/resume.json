@@ -1,16 +1,16 @@
 {
     "personal": {
-        "fullName": "[ FULL NAME ]",
-        "title": "SENIOR ARCHITECT",
+        "fullName": "Miroljub Anastasov",
+        "title": "ARCHITECT",
         "photo": "/Miroljub Photo.jpg",
         "summary": "[ Professional summary placeholder — 3 to 5 lines describing 15 years of architectural practice, areas of specialization (e.g. residential, commercial, urban design, sustainable architecture), leadership experience and signature approach. ]",
         "contact": {
-            "phone": "+00 000 000 000",
-            "email": "name@example.com",
-            "address": "Street, City, Country",
+            "phone": "+49 162 950 22 40",
+            "email": "miroljub.a@gmail.com",
+            "address": "Further Strasse, 90513 Zirndorf, Germany",
             "website": "www.example.com",
             "linkedin": "/in/your-handle",
-            "dateOfBirth": "DD / MM / YYYY"
+            "dateOfBirth": "18 / 07 / 1984"
         }
     },
     "languages": [
@@ -35,28 +35,20 @@
             "category": "Software",
             "items": [
                 {
-                    "name": "AutoCAD",
-                    "level": 5
-                },
-                {
                     "name": "Revit / BIM",
                     "level": 5
                 },
                 {
-                    "name": "SketchUp",
-                    "level": 4
-                },
-                {
                     "name": "Rhino + Grasshopper",
-                    "level": 4
+                    "level": 5
                 },
                 {
                     "name": "Adobe Creative Suite",
                     "level": 4
                 },
                 {
-                    "name": "V-Ray / Enscape",
-                    "level": 4
+                    "name": "Enscape",
+                    "level": 5
                 }
             ]
         },
