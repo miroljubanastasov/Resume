@@ -70,12 +70,11 @@ function makeSheet(c) {
             flex: 1.15,
             padding: 24,
             justifyContent: 'center',
-            position: 'relative',
         },
         heroQr: {
             position: 'absolute',
-            top: 18,
-            right: 18,
+            top: 12,
+            right: 12,
             width: 56,
             height: 56,
             padding: 3,
@@ -88,6 +87,7 @@ function makeSheet(c) {
         },
         heroRight: {
             flex: 1,
+            position: 'relative',
             backgroundColor: '#0c0c0c',
         },
         heroPhoto: {
@@ -423,11 +423,6 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                 {/* HERO */}
                 <View style={styles.hero}>
                     <View style={styles.heroLeft}>
-                        {qrDataUrl && (
-                            <View style={styles.heroQr}>
-                                <Image src={qrDataUrl} style={styles.heroQrImage} />
-                            </View>
-                        )}
                         <Text style={styles.title}>{personal.title}</Text>
                         <Text style={styles.name}>{personal.fullName}</Text>
                         <View style={styles.rule} />
@@ -442,6 +437,11 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                         ))}
                     </View>
                     <View style={styles.heroRight}>
+                        {qrDataUrl && (
+                            <View style={styles.heroQr}>
+                                <Image src={qrDataUrl} style={styles.heroQrImage} />
+                            </View>
+                        )}
                         {photoUrl && <Image src={photoUrl} style={styles.heroPhoto} />}
                     </View>
                 </View>

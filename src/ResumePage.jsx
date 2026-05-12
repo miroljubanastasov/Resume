@@ -294,46 +294,12 @@ export default function ResumePage({ data = resumeData }) {
                     {/* Hero LEFT: info on black */}
                     <Box
                         sx={{
-                            position: 'relative',
                             p: { xs: 4, sm: 6, md: 8 },
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'center',
                         }}
                     >
-                        {qrDataUrl && (
-                            <Tooltip title={qrTarget} placement="left">
-                                <Box
-                                    component="a"
-                                    href={qrTarget}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    sx={{
-                                        position: 'absolute',
-                                        top: { xs: 16, sm: 24, md: 32 },
-                                        right: { xs: 16, sm: 24, md: 32 },
-                                        width: { xs: 56, sm: 72, md: 84 },
-                                        height: { xs: 56, sm: 72, md: 84 },
-                                        bgcolor: '#FFFFFF',
-                                        borderRadius: 1,
-                                        p: 0.5,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        boxShadow: '0 4px 16px rgba(0,0,0,0.35)',
-                                        textDecoration: 'none',
-                                        '@media print': { ...PRINT_COLOR, boxShadow: 'none' },
-                                    }}
-                                >
-                                    <Box
-                                        component="img"
-                                        src={qrDataUrl}
-                                        alt="QR code linking to online CV"
-                                        sx={{ width: '100%', height: '100%', display: 'block' }}
-                                    />
-                                </Box>
-                            </Tooltip>
-                        )}
                         <Typography
                             variant="overline"
                             sx={{ color: 'accent.main', letterSpacing: 4, fontSize: '0.78rem' }}
@@ -397,6 +363,40 @@ export default function ResumePage({ data = resumeData }) {
                             '@media print': { ...PRINT_COLOR, minHeight: 0 },
                         }}
                     >
+                        {qrDataUrl && (
+                            <Tooltip title={qrTarget} placement="left">
+                                <Box
+                                    component="a"
+                                    href={qrTarget}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    sx={{
+                                        position: 'absolute',
+                                        top: 16,
+                                        right: 16,
+                                        zIndex: 1,
+                                        width: { xs: 56, sm: 72, md: 84 },
+                                        height: { xs: 56, sm: 72, md: 84 },
+                                        bgcolor: '#FFFFFF',
+                                        borderRadius: 1,
+                                        p: 0.5,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        boxShadow: '0 4px 16px rgba(0,0,0,0.35)',
+                                        textDecoration: 'none',
+                                        '@media print': { ...PRINT_COLOR, boxShadow: 'none' },
+                                    }}
+                                >
+                                    <Box
+                                        component="img"
+                                        src={qrDataUrl}
+                                        alt="QR code linking to online CV"
+                                        sx={{ width: '100%', height: '100%', display: 'block' }}
+                                    />
+                                </Box>
+                            </Tooltip>
+                        )}
                         {!photoUrl && (
                             <Box
                                 sx={{
