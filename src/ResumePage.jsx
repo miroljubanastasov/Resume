@@ -186,7 +186,7 @@ function SkillCategory({ category, items }) {
 function LanguageRow({ label, level, cefr }) {
     return (
         <Box sx={{ mb: 1.4 }}>
-            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 0.5 }}>
+            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 0.5, width: '100%' }}>
                 <Typography variant="body2" sx={{ fontSize: '0.82rem' }}>
                     {label}
                 </Typography>
