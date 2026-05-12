@@ -1,29 +1,22 @@
-import { Box, Container, CssBaseline, Typography } from '@mui/material';
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import ResumePage from './ResumePage';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: '"Inter","Roboto","Helvetica","Arial",sans-serif',
+  },
+  palette: {
+    primary: { main: '#1F4E79' },
+    secondary: { main: '#2E75B6' },
+  },
+});
 
 function App() {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth="md">
-        <Box
-          sx={{
-            minHeight: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center',
-          }}
-        >
-          <Typography variant="h2" component="h1" gutterBottom>
-            Hello, World!
-          </Typography>
-          <Typography variant="h5" color="text.secondary">
-            Resume website — coming soon.
-          </Typography>
-        </Box>
-      </Container>
-    </>
+      <ResumePage />
+    </ThemeProvider>
   );
 }
 
