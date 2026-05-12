@@ -177,17 +177,14 @@ function makeSheet(c) {
             marginBottom: 2,
         },
         skillName: { fontSize: 8.5 },
-        skillLevel: { fontSize: 7.5, color: c.textSecondary },
-        barTrack: {
-            height: 4,
-            borderRadius: 2,
-            backgroundColor: 'rgba(0,0,0,0.12)',
-            overflow: 'hidden',
+        skillSegments: {
+            flexDirection: 'row',
+            gap: 2,
         },
-        barFill: {
-            height: '100%',
-            backgroundColor: c.accent,
-            borderRadius: 2,
+        skillSegment: {
+            flex: 1,
+            height: 3,
+            borderRadius: 1,
         },
         chipRow: {
             flexDirection: 'row',
@@ -311,22 +308,27 @@ function SectionTitle({ children, styles }) {
     );
 }
 
-function SkillBar({ name, level, styles }) {
-    const pct = Math.max(0, Math.min(1, (level ?? 0) / 5));
+function SkillBar({ name, level, styles, colors }) {
+    const lvl = Math.max(0, Math.min(5, level ?? 0));
     return (
         <View style={styles.skillRow}>
-            <View style={styles.skillTopRow}>
-                <Text style={styles.skillName}>{name}</Text>
-                <Text style={styles.skillLevel}>{level}/5</Text>
-            </View>
-            <View style={styles.barTrack}>
-                <View style={[styles.barFill, { width: `${pct * 100}%` }]} />
+            <Text style={[styles.skillName, { marginBottom: 2 }]}>{name}</Text>
+            <View style={styles.skillSegments}>
+                {[1, 2, 3, 4, 5].map((i) => (
+                    <View
+                        key={i}
+                        style={[
+                            styles.skillSegment,
+                            { backgroundColor: i <= lvl ? colors.accent : 'rgba(0,0,0,0.12)' },
+                        ]}
+                    />
+                ))}
             </View>
         </View>
     );
 }
 
-function SkillCategory({ category, items, styles }) {
+function SkillCategory({ category, items, styles, colors }) {
     const hasLevels = items.some((i) => typeof i.level === 'number');
     return (
         <View style={styles.skillsCol} wrap={false}>
@@ -338,6 +340,7 @@ function SkillCategory({ category, items, styles }) {
                         name={it.name}
                         level={it.level ?? 0}
                         styles={styles}
+                        colors={colors}
                     />
                 ))
             ) : (
@@ -454,6 +457,7 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                             category={g.category}
                             items={g.items}
                             styles={styles}
+                            colors={colors}
                         />
                     ))}
                     {languages?.length > 0 && (

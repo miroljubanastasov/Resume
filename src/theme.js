@@ -35,7 +35,7 @@ const palette = {
 };
 
 const layout = {
-    contentMaxWidth: 1000,
+    contentMaxWidth: 1200,
     heroMinHeight: { xs: 320, sm: 460 },
     bandPadY: { xs: 4, sm: 6 },
     bandPadX: { xs: 3, sm: 6, md: 8 },

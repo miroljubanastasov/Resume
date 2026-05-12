@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import QRCode from 'qrcode';
-import { Box, Chip, CircularProgress, Fab, LinearProgress, Stack, Tooltip, Typography, useTheme } from '@mui/material';
+import { Box, Chip, CircularProgress, Fab, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -143,15 +143,22 @@ function TimelineItem({ period, title, subtitle, location, bullets }) {
 function SkillBar({ label, level }) {
     return (
         <Box sx={{ mb: 1.1 }}>
-            <Stack direction="row" justifyContent="space-between" sx={{ mb: 0.3 }}>
-                <Typography variant="body2" sx={{ fontSize: '0.82rem' }}>
-                    {label}
-                </Typography>
-                <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                    {level}/5
-                </Typography>
+            <Typography variant="body2" sx={{ fontSize: '0.82rem', mb: 0.5 }}>
+                {label}
+            </Typography>
+            <Stack direction="row" spacing={0.5}>
+                {[1, 2, 3, 4, 5].map((i) => (
+                    <Box
+                        key={i}
+                        sx={{
+                            flex: 1,
+                            height: 4,
+                            borderRadius: 1,
+                            bgcolor: i <= level ? 'accent.main' : 'rgba(0,0,0,0.1)',
+                        }}
+                    />
+                ))}
             </Stack>
-            <LinearProgress variant="determinate" value={(level / 5) * 100} />
         </Box>
     );
 }
@@ -238,7 +245,7 @@ export default function ResumePage({ data = resumeData }) {
             errorCorrectionLevel: 'M',
             margin: 1,
             width: 240,
-            color: { dark: '#FFFFFF', light: '#0a0a0a' },
+            color: { dark: '#FFFFFF', light: '#000000' },
         })
             .then((url) => {
                 if (!cancelled) setQrDataUrl(url);
@@ -330,7 +337,7 @@ export default function ResumePage({ data = resumeData }) {
                         <Typography
                             sx={{
                                 color: 'hero.fgMuted',
-                                lineHeight: 1.7,
+                                lineHeight: 1.5,
                                 mb: 3,
                                 fontSize: { xs: '0.9rem', md: '0.98rem' },
                                 maxWidth: 560,

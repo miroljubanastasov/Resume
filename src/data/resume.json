@@ -3,7 +3,7 @@
         "fullName": "Miroljub Anastasov",
         "title": "ARCHITECT",
         "photo": "Miroljub Photo.jpg",
-        "summary": "As a design architect throughout my professional work, I was involved in various high-end projects around the Middle East. As a senior architect and associate level architect, I was leading several successful competition designs as well as leading the concept design stages.",
+        "summary": "Arxhitect designer, computational designer with 10+ years of experience in leading design teams and delivering innovative architectural solutions. Skilled in Revit, Rhino, Grasshopper, Python, and C#. Proven track record of successful projects across various sectors, including hospitality, mixed-use developments, and urban planning. Passionate about sustainable design and leveraging technology to enhance architectural outcomes.",
         "contact": {
             "phone": "+49 162 950 22 40",
             "email": "miroljub.a@gmail.com",
@@ -122,6 +122,7 @@
             "location": "Serbia",
             "bullets": [
                 "Design development. Concept design, computation design, leading team of architects and designers. Face clients and consultants.",
+                "",
                 "Successful competition entry for capital government master-plan project in Abu Dhabi, UAE.",
                 "Mentored junior architects and led BIM standards."
             ]
