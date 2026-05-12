@@ -377,9 +377,9 @@ export default function ResumePage({ data = resumeData }) {
                         px: L.bandPadX,
                         py: L.bandPadY,
                         display: 'grid',
-                        gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+                        gridTemplateColumns: { xs: '1fr', md: L.experienceEducationColumns },
                         gap: { xs: 4, md: 6 },
-                        '@media print': { gridTemplateColumns: '1fr 1fr', gap: 32, py: 24 },
+                        '@media print': { gridTemplateColumns: L.experienceEducationColumns, gap: 32, py: 24 },
                     }}
                 >
                     <Box>

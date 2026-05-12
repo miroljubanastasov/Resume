@@ -14,18 +14,18 @@ import { createTheme } from '@mui/material/styles';
 
 const palette = {
     hero: {
-        bg: '#0F0F10',
+        bg: '#030303',
         fg: '#FFFFFF',
         fgMuted: 'rgba(255,255,255,0.78)',
-        photoBg: '#222',
+        photoBg: '#0c0c0c',
     },
     accent: {
-        main: '#C9A24B', // warm gold
-        contrastText: '#000',
-        soft: '#7a6224', // darker variant for period labels on light bg
+        main: '#4bc5c9', // warm gold
+        contrastText: '#ffffff',
+        soft: '#2b8b9c', // darker variant for period labels on light bg
     },
     band: {
-        light: '#F4F4F2', // skills/languages band
+        light: '#dadada', // skills/languages band
         page: '#FFFFFF', // experience/education band
     },
     text: {
@@ -41,6 +41,8 @@ const layout = {
     bandPadX: { xs: 3, sm: 6, md: 8 },
     sectionRuleWidth: 64,
     sectionRuleHeight: 3,
+    // Work experience is wider; adjust the ratio here to control proportions
+    experienceEducationColumns: '1.5fr 1fr',
 };
 
 const theme = createTheme({
