@@ -1,4 +1,4 @@
-import { Avatar, Box, Chip, Divider, LinearProgress, Stack, Typography } from '@mui/material';
+import { Box, Chip, LinearProgress, Stack, Typography } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -13,9 +13,11 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PersonIcon from '@mui/icons-material/Person';
 import resumeData from './data/resume.json';
 
-const SIDE_BG = '#1F4E79';
-const SIDE_FG = '#FFFFFF';
-const ACCENT = '#2E75B6';
+const HERO_BG = '#0F0F10';
+const HERO_FG = '#FFFFFF';
+const ACCENT = '#C9A24B'; // warm gold accent on black
+const MUTED_BG = '#F4F4F2';
+const TEXT_DARK = '#1A1A1A';
 
 const CATEGORY_ICONS = {
     Software: <BuildIcon sx={{ fontSize: 16 }} />,
@@ -23,9 +25,11 @@ const CATEGORY_ICONS = {
     Strengths: <EmojiEventsIcon sx={{ fontSize: 16 }} />,
 };
 
-function SectionTitle({ icon, children, light }) {
+/* ---------------- Shared atoms ---------------- */
+
+function SectionTitle({ icon, children, dark }) {
     return (
-        <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
+        <Stack direction="row" spacing={1.2} alignItems="center" sx={{ mb: 1.5, mt: 0 }}>
             <Box
                 sx={{
                     width: 28,
@@ -34,8 +38,8 @@ function SectionTitle({ icon, children, light }) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    bgcolor: light ? 'rgba(255,255,255,0.15)' : ACCENT,
-                    color: light ? SIDE_FG : '#fff',
+                    bgcolor: ACCENT,
+                    color: '#000',
                 }}
             >
                 {icon}
@@ -43,10 +47,10 @@ function SectionTitle({ icon, children, light }) {
             <Typography
                 variant="overline"
                 sx={{
-                    fontWeight: 700,
-                    letterSpacing: 2,
-                    color: light ? SIDE_FG : ACCENT,
-                    fontSize: '0.8rem',
+                    fontWeight: 800,
+                    letterSpacing: 3,
+                    color: dark ? HERO_FG : TEXT_DARK,
+                    fontSize: '0.82rem',
                 }}
             >
                 {children}
@@ -55,26 +59,36 @@ function SectionTitle({ icon, children, light }) {
                 sx={{
                     flexGrow: 1,
                     height: '1px',
-                    bgcolor: light ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.12)',
+                    bgcolor: dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.12)',
                 }}
             />
         </Stack>
     );
 }
 
-function SideInfoRow({ icon, label, value }) {
+function ContactRow({ icon, value, dark }) {
     if (!value) return null;
     return (
-        <Stack direction="row" spacing={1.5} alignItems="flex-start" sx={{ mb: 1.2 }}>
-            <Box sx={{ color: 'rgba(255,255,255,0.85)', mt: '2px' }}>{icon}</Box>
-            <Box sx={{ minWidth: 0 }}>
-                <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.65)', display: 'block', lineHeight: 1.2 }}>
-                    {label}
-                </Typography>
-                <Typography variant="body2" sx={{ color: SIDE_FG, wordBreak: 'break-word' }}>
-                    {value}
-                </Typography>
+        <Stack direction="row" spacing={1.2} alignItems="center" sx={{ mb: 0.6 }}>
+            <Box
+                sx={{
+                    color: dark ? ACCENT : ACCENT,
+                    display: 'flex',
+                    alignItems: 'center',
+                }}
+            >
+                {icon}
             </Box>
+            <Typography
+                variant="body2"
+                sx={{
+                    color: dark ? 'rgba(255,255,255,0.9)' : TEXT_DARK,
+                    fontSize: '0.82rem',
+                    wordBreak: 'break-word',
+                }}
+            >
+                {value}
+            </Typography>
         </Stack>
     );
 }
@@ -100,10 +114,13 @@ function TimelineItem({ period, title, subtitle, location, bullets }) {
                     top: 18,
                     bottom: 0,
                     width: '2px',
-                    bgcolor: 'rgba(0,0,0,0.08)',
+                    bgcolor: 'rgba(0,0,0,0.1)',
                 }}
             />
-            <Typography variant="caption" sx={{ color: ACCENT, fontWeight: 700, letterSpacing: 1 }}>
+            <Typography
+                variant="caption"
+                sx={{ color: '#7a6224', fontWeight: 800, letterSpacing: 1.5 }}
+            >
                 {period}
             </Typography>
             <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.2 }}>
@@ -118,7 +135,10 @@ function TimelineItem({ period, title, subtitle, location, bullets }) {
                 )}
             </Typography>
             {bullets && bullets.length > 0 && (
-                <Box component="ul" sx={{ pl: 2.5, m: 0, '& li': { fontSize: '0.875rem', lineHeight: 1.5 } }}>
+                <Box
+                    component="ul"
+                    sx={{ pl: 2.5, m: 0, '& li': { fontSize: '0.875rem', lineHeight: 1.5 } }}
+                >
                     {bullets.map((b, i) => (
                         <li key={i}>{b}</li>
                     ))}
@@ -130,12 +150,12 @@ function TimelineItem({ period, title, subtitle, location, bullets }) {
 
 function SkillBar({ label, level }) {
     return (
-        <Box sx={{ mb: 1.2 }}>
+        <Box sx={{ mb: 1.1 }}>
             <Stack direction="row" justifyContent="space-between" sx={{ mb: 0.3 }}>
-                <Typography variant="body2" sx={{ color: SIDE_FG }}>
+                <Typography variant="body2" sx={{ color: TEXT_DARK, fontSize: '0.82rem' }}>
                     {label}
                 </Typography>
-                <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                     {level}/5
                 </Typography>
             </Stack>
@@ -145,8 +165,8 @@ function SkillBar({ label, level }) {
                 sx={{
                     height: 6,
                     borderRadius: 3,
-                    bgcolor: 'rgba(255,255,255,0.15)',
-                    '& .MuiLinearProgress-bar': { bgcolor: '#FFD966' },
+                    bgcolor: 'rgba(0,0,0,0.08)',
+                    '& .MuiLinearProgress-bar': { bgcolor: ACCENT },
                 }}
             />
         </Box>
@@ -156,8 +176,10 @@ function SkillBar({ label, level }) {
 function SkillCategory({ category, items }) {
     const hasLevels = items.some((i) => typeof i.level === 'number');
     return (
-        <Box sx={{ mt: 3 }}>
-            <SectionTitle icon={CATEGORY_ICONS[category] ?? <BuildIcon sx={{ fontSize: 16 }} />} light>
+        <Box sx={{ mb: 2.5 }}>
+            <SectionTitle
+                icon={CATEGORY_ICONS[category] ?? <BuildIcon sx={{ fontSize: 16 }} />}
+            >
                 {category}
             </SectionTitle>
             {hasLevels ? (
@@ -170,9 +192,10 @@ function SkillCategory({ category, items }) {
                             label={it.name}
                             size="small"
                             sx={{
-                                bgcolor: 'rgba(255,255,255,0.15)',
-                                color: SIDE_FG,
-                                fontSize: '0.7rem',
+                                bgcolor: '#000',
+                                color: HERO_FG,
+                                fontSize: '0.72rem',
+                                fontWeight: 600,
                             }}
                         />
                     ))}
@@ -184,15 +207,21 @@ function SkillCategory({ category, items }) {
 
 function LanguageRow({ label, level, cefr }) {
     return (
-        <Box sx={{ mb: 1.2 }}>
+        <Box sx={{ mb: 1.1 }}>
             <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Typography variant="body2" sx={{ color: SIDE_FG }}>
+                <Typography variant="body2" sx={{ color: TEXT_DARK, fontSize: '0.82rem' }}>
                     {label}
                 </Typography>
                 <Chip
                     label={cefr}
                     size="small"
-                    sx={{ bgcolor: 'rgba(255,255,255,0.15)', color: SIDE_FG, height: 20, fontSize: '0.7rem' }}
+                    sx={{
+                        bgcolor: '#000',
+                        color: HERO_FG,
+                        height: 20,
+                        fontSize: '0.7rem',
+                        fontWeight: 700,
+                    }}
                 />
             </Stack>
             <Stack direction="row" spacing={0.5} sx={{ mt: 0.5 }}>
@@ -203,7 +232,7 @@ function LanguageRow({ label, level, cefr }) {
                             flex: 1,
                             height: 4,
                             borderRadius: 1,
-                            bgcolor: i <= level ? '#FFD966' : 'rgba(255,255,255,0.15)',
+                            bgcolor: i <= level ? ACCENT : 'rgba(0,0,0,0.1)',
                         }}
                     />
                 ))}
@@ -211,6 +240,8 @@ function LanguageRow({ label, level, cefr }) {
         </Box>
     );
 }
+
+/* ---------------- Page ---------------- */
 
 export default function ResumePage({ data = resumeData }) {
     const { personal, languages, skills, experience, education } = data;
@@ -222,10 +253,7 @@ export default function ResumePage({ data = resumeData }) {
                 bgcolor: { xs: '#fff', sm: '#eceff1' },
                 minHeight: '100vh',
                 py: { xs: 0, sm: 4 },
-                '@media print': {
-                    bgcolor: '#fff',
-                    py: 0,
-                },
+                '@media print': { bgcolor: '#fff', py: 0 },
             }}
         >
             <Box
@@ -236,107 +264,163 @@ export default function ResumePage({ data = resumeData }) {
                     mx: 'auto',
                     bgcolor: '#fff',
                     boxShadow: { xs: 'none', sm: 3 },
-                    display: 'grid',
-                    gridTemplateColumns: { xs: '1fr', md: '230px 1fr' },
+                    display: 'flex',
+                    flexDirection: 'column',
                     '@media print': {
                         width: '210mm',
                         minHeight: '297mm',
                         boxShadow: 'none',
-                        gridTemplateColumns: '230px 1fr',
                     },
                 }}
             >
-                {/* ============ SIDEBAR ============ */}
+                {/* ============ HERO ============ */}
                 <Box
                     sx={{
-                        bgcolor: SIDE_BG,
-                        color: SIDE_FG,
-                        p: 3,
-                        '@media print': { WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact' },
+                        display: 'grid',
+                        gridTemplateColumns: { xs: '1fr', sm: '1.15fr 1fr' },
+                        bgcolor: HERO_BG,
+                        color: HERO_FG,
+                        '@media print': {
+                            WebkitPrintColorAdjust: 'exact',
+                            printColorAdjust: 'exact',
+                            gridTemplateColumns: '1.15fr 1fr',
+                        },
                     }}
                 >
-                    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                        <Avatar
-                            src={personal.photo || undefined}
+                    {/* Hero LEFT: info on black */}
+                    <Box sx={{ p: { xs: 3, sm: 4.5 }, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <Typography
+                            variant="overline"
                             sx={{
-                                width: 140,
-                                height: 140,
-                                border: '4px solid rgba(255,255,255,0.25)',
-                                bgcolor: 'rgba(255,255,255,0.1)',
-                                fontSize: '3rem',
+                                color: ACCENT,
+                                letterSpacing: 4,
+                                fontWeight: 700,
+                                fontSize: '0.75rem',
                             }}
                         >
-                            <PersonIcon sx={{ fontSize: 80, color: 'rgba(255,255,255,0.6)' }} />
-                        </Avatar>
+                            {personal.title}
+                        </Typography>
+                        <Typography
+                            variant="h3"
+                            sx={{
+                                fontWeight: 800,
+                                lineHeight: 1.05,
+                                letterSpacing: '-0.5px',
+                                color: HERO_FG,
+                                mt: 0.5,
+                                mb: 2,
+                                fontSize: { xs: '2rem', sm: '2.6rem' },
+                            }}
+                        >
+                            {personal.fullName}
+                        </Typography>
+
+                        <Box
+                            sx={{
+                                width: 56,
+                                height: 3,
+                                bgcolor: ACCENT,
+                                mb: 2,
+                            }}
+                        />
+
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                color: 'rgba(255,255,255,0.78)',
+                                lineHeight: 1.65,
+                                mb: 2.5,
+                                fontSize: '0.85rem',
+                            }}
+                        >
+                            {personal.summary}
+                        </Typography>
+
+                        <Stack spacing={0.2}>
+                            <ContactRow icon={<PhoneIcon fontSize="small" />} value={contact.phone} dark />
+                            <ContactRow icon={<EmailIcon fontSize="small" />} value={contact.email} dark />
+                            <ContactRow icon={<LocationOnIcon fontSize="small" />} value={contact.address} dark />
+                            <ContactRow icon={<LanguageIcon fontSize="small" />} value={contact.website} dark />
+                            <ContactRow icon={<LinkedInIcon fontSize="small" />} value={contact.linkedin} dark />
+                            <ContactRow icon={<CakeIcon fontSize="small" />} value={contact.dateOfBirth} dark />
+                        </Stack>
                     </Box>
 
-                    <Typography variant="h6" align="center" sx={{ fontWeight: 700, lineHeight: 1.1 }}>
-                        {personal.fullName}
-                    </Typography>
-                    <Typography
-                        variant="caption"
-                        align="center"
-                        sx={{ display: 'block', color: 'rgba(255,255,255,0.75)', letterSpacing: 2, mb: 2 }}
+                    {/* Hero RIGHT: photo */}
+                    <Box
+                        sx={{
+                            position: 'relative',
+                            minHeight: { xs: 280, sm: 'auto' },
+                            backgroundImage: personal.photo ? `url("${personal.photo}")` : 'none',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center top',
+                            backgroundRepeat: 'no-repeat',
+                            bgcolor: '#222',
+                            '@media print': {
+                                WebkitPrintColorAdjust: 'exact',
+                                printColorAdjust: 'exact',
+                            },
+                        }}
                     >
-                        {personal.title}
-                    </Typography>
-
-                    <Divider sx={{ borderColor: 'rgba(255,255,255,0.2)', mb: 2 }} />
-
-                    <SectionTitle icon={<PersonIcon sx={{ fontSize: 16 }} />} light>
-                        Contact
-                    </SectionTitle>
-                    <SideInfoRow icon={<PhoneIcon fontSize="small" />} label="Phone" value={contact.phone} />
-                    <SideInfoRow icon={<EmailIcon fontSize="small" />} label="Email" value={contact.email} />
-                    <SideInfoRow icon={<LocationOnIcon fontSize="small" />} label="Address" value={contact.address} />
-                    <SideInfoRow icon={<LanguageIcon fontSize="small" />} label="Website" value={contact.website} />
-                    <SideInfoRow icon={<LinkedInIcon fontSize="small" />} label="LinkedIn" value={contact.linkedin} />
-                    <SideInfoRow
-                        icon={<CakeIcon fontSize="small" />}
-                        label="Date of birth"
-                        value={contact.dateOfBirth}
-                    />
-
-                    {languages && languages.length > 0 && (
-                        <Box sx={{ mt: 3 }}>
-                            <SectionTitle icon={<TranslateIcon sx={{ fontSize: 16 }} />} light>
-                                Languages
-                            </SectionTitle>
-                            {languages.map((l) => (
-                                <LanguageRow key={l.name} label={l.name} level={l.level} cefr={l.cefr} />
-                            ))}
-                        </Box>
-                    )}
-
-                    {skills?.map((group) => (
-                        <SkillCategory key={group.category} category={group.category} items={group.items} />
-                    ))}
+                        {!personal.photo && (
+                            <Box
+                                sx={{
+                                    position: 'absolute',
+                                    inset: 0,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: 'rgba(255,255,255,0.3)',
+                                }}
+                            >
+                                <PersonIcon sx={{ fontSize: 120 }} />
+                            </Box>
+                        )}
+                    </Box>
                 </Box>
 
-                {/* ============ MAIN ============ */}
-                <Box sx={{ p: { xs: 3, sm: 4 } }}>
-                    <SectionTitle icon={<PersonIcon sx={{ fontSize: 16 }} />}>About me</SectionTitle>
-                    <Typography variant="body2" sx={{ mb: 3, lineHeight: 1.6, color: 'text.secondary' }}>
-                        {personal.summary}
-                    </Typography>
+                {/* ============ BODY (two columns) ============ */}
+                <Box
+                    sx={{
+                        flex: 1,
+                        display: 'grid',
+                        gridTemplateColumns: { xs: '1fr', md: '1fr 1.7fr' },
+                        '@media print': { gridTemplateColumns: '1fr 1.7fr' },
+                    }}
+                >
+                    {/* Body LEFT: skills + languages */}
+                    <Box
+                        sx={{
+                            bgcolor: MUTED_BG,
+                            p: { xs: 3, sm: 3.5 },
+                            '@media print': {
+                                WebkitPrintColorAdjust: 'exact',
+                                printColorAdjust: 'exact',
+                            },
+                        }}
+                    >
+                        {skills?.map((group) => (
+                            <SkillCategory key={group.category} category={group.category} items={group.items} />
+                        ))}
 
-                    <SectionTitle icon={<WorkIcon sx={{ fontSize: 16 }} />}>Work experience</SectionTitle>
-                    {experience.map((e, idx) => (
-                        <TimelineItem
-                            key={idx}
-                            period={e.period}
-                            title={e.title}
-                            subtitle={e.organization}
-                            location={e.location}
-                            bullets={e.bullets}
-                        />
-                    ))}
+                        {languages && languages.length > 0 && (
+                            <Box>
+                                <SectionTitle icon={<TranslateIcon sx={{ fontSize: 16 }} />}>
+                                    Languages
+                                </SectionTitle>
+                                {languages.map((l) => (
+                                    <LanguageRow key={l.name} label={l.name} level={l.level} cefr={l.cefr} />
+                                ))}
+                            </Box>
+                        )}
+                    </Box>
 
-                    <Box sx={{ mt: 1 }}>
-                        <SectionTitle icon={<SchoolIcon sx={{ fontSize: 16 }} />}>
-                            Education & training
+                    {/* Body RIGHT: experience + education */}
+                    <Box sx={{ p: { xs: 3, sm: 4 } }}>
+                        <SectionTitle icon={<WorkIcon sx={{ fontSize: 16 }} />}>
+                            Work experience
                         </SectionTitle>
-                        {education.map((e, idx) => (
+                        {experience.map((e, idx) => (
                             <TimelineItem
                                 key={idx}
                                 period={e.period}
@@ -346,6 +430,22 @@ export default function ResumePage({ data = resumeData }) {
                                 bullets={e.bullets}
                             />
                         ))}
+
+                        <Box sx={{ mt: 2 }}>
+                            <SectionTitle icon={<SchoolIcon sx={{ fontSize: 16 }} />}>
+                                Education & training
+                            </SectionTitle>
+                            {education.map((e, idx) => (
+                                <TimelineItem
+                                    key={idx}
+                                    period={e.period}
+                                    title={e.title}
+                                    subtitle={e.organization}
+                                    location={e.location}
+                                    bullets={e.bullets}
+                                />
+                            ))}
+                        </Box>
                     </Box>
                 </Box>
             </Box>
