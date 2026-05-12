@@ -1,4 +1,4 @@
-import { Box, Chip, LinearProgress, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Chip, Fab, LinearProgress, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -11,6 +11,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import TranslateIcon from '@mui/icons-material/Translate';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PersonIcon from '@mui/icons-material/Person';
+import PrintIcon from '@mui/icons-material/Print';
 import resumeData from './data/resume.json';
 
 const CATEGORY_ICONS = {
@@ -84,7 +85,7 @@ function ContactRow({ icon, value, dark }) {
 
 function TimelineItem({ period, title, subtitle, location, bullets }) {
     return (
-        <Box sx={{ position: 'relative', pl: 3, pb: 2.5, breakInside: 'avoid' }}>
+        <Box className="avoid-break" sx={{ position: 'relative', pl: 3, pb: 2.5, breakInside: 'avoid' }}>
             <Box
                 sx={{
                     position: 'absolute',
@@ -243,6 +244,7 @@ export default function ResumePage({ data = resumeData }) {
                 }}
             >
                 <Box
+                    className="print-hero"
                     sx={{
                         maxWidth: L.contentMaxWidth,
                         mx: 'auto',
@@ -312,6 +314,7 @@ export default function ResumePage({ data = resumeData }) {
 
                     {/* Hero RIGHT: photo */}
                     <Box
+                        className="print-hero-photo"
                         sx={{
                             position: 'relative',
                             minHeight: { xs: 320, sm: 'auto' },
@@ -344,6 +347,7 @@ export default function ResumePage({ data = resumeData }) {
             {/* ============ SKILLS + LANGUAGES band ============ */}
             <Box sx={{ bgcolor: 'band.light', width: '100%', '@media print': PRINT_COLOR }}>
                 <Box
+                    className="print-band"
                     sx={{
                         maxWidth: L.contentMaxWidth,
                         mx: 'auto',
@@ -374,6 +378,7 @@ export default function ResumePage({ data = resumeData }) {
             {/* ============ EXPERIENCE + EDUCATION band ============ */}
             <Box sx={{ width: '100%', bgcolor: 'band.page' }}>
                 <Box
+                    className="print-band"
                     sx={{
                         maxWidth: L.contentMaxWidth,
                         mx: 'auto',
@@ -417,11 +422,23 @@ export default function ResumePage({ data = resumeData }) {
                 </Box>
             </Box>
 
-            {/* Print styling */}
-            <style>{`
-        @page { size: A4; margin: 0; }
-        @media print { body { margin: 0; } }
-      `}</style>
+            {/* Floating print button (hidden in print) */}
+            <Tooltip title="Print / Save as PDF" placement="left">
+                <Fab
+                    className="no-print"
+                    color="primary"
+                    aria-label="print"
+                    onClick={() => window.print()}
+                    sx={{
+                        position: 'fixed',
+                        bottom: 24,
+                        right: 24,
+                        zIndex: 1300,
+                    }}
+                >
+                    <PrintIcon />
+                </Fab>
+            </Tooltip>
         </Box>
     );
 }

@@ -14,15 +14,68 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ========================================================================== */
+/* A4 PRINT                                                                    */
+/* ========================================================================== */
+
 @page {
-  size: A4;
+  size: A4 portrait;
   margin: 0;
 }
 
 @media print {
+  /* Force backgrounds (hero, sidebar bands, accent dots) to print. */
+  html,
+  body,
+  #root,
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   html,
   body,
   #root {
     background: #fff !important;
+    width: 210mm;
+  }
+
+  /* Shrink the design so the same content fits A4 with comfortable margins. */
+  :root {
+    font-size: 11pt;
+  }
+
+  /* Hide on-screen UI helpers in print. */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Avoid breaking inside timeline cards / section headers. */
+  .avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Avoid a heading orphaned at the bottom of a page. */
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Tighter band padding when printed. */
+  .print-band {
+    padding-top: 10mm !important;
+    padding-bottom: 10mm !important;
+    padding-left: 12mm !important;
+    padding-right: 12mm !important;
+  }
+
+  .print-hero {
+    min-height: 0 !important;
+  }
+
+  /* Photo aspect: keep photo from blowing up to a huge height in print. */
+  .print-hero-photo {
+    min-height: 70mm !important;
   }
 }
