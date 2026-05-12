@@ -1,4 +1,5 @@
-import { Box, Chip, Fab, LinearProgress, Stack, Tooltip, Typography, useTheme } from '@mui/material';
+import { useState } from 'react';
+import { Box, Chip, CircularProgress, Fab, LinearProgress, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -12,6 +13,7 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PersonIcon from '@mui/icons-material/Person';
 import PrintIcon from '@mui/icons-material/Print';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import resumeData from './data/resume.json';
 
 const CATEGORY_ICONS = {
@@ -225,6 +227,20 @@ export default function ResumePage({ data = resumeData }) {
         ? `${import.meta.env.BASE_URL}${personal.photo}`
         : null;
 
+    const [pdfBusy, setPdfBusy] = useState(false);
+    const handleDownloadPdf = async () => {
+        if (pdfBusy) return;
+        setPdfBusy(true);
+        try {
+            const { exportResumePdf } = await import('./pdf/exportResumePdf.jsx');
+            await exportResumePdf({ data, theme, photoUrl });
+        } catch (err) {
+            console.error('PDF export failed', err);
+        } finally {
+            setPdfBusy(false);
+        }
+    };
+
     return (
         <Box
             sx={{
@@ -422,23 +438,38 @@ export default function ResumePage({ data = resumeData }) {
                 </Box>
             </Box>
 
-            {/* Floating print button (hidden in print) */}
-            <Tooltip title="Print / Save as PDF" placement="left">
-                <Fab
-                    className="no-print"
-                    color="primary"
-                    aria-label="print"
-                    onClick={() => window.print()}
-                    sx={{
-                        position: 'fixed',
-                        bottom: 24,
-                        right: 24,
-                        zIndex: 1300,
-                    }}
-                >
-                    <PrintIcon />
-                </Fab>
-            </Tooltip>
+            {/* Floating action buttons (hidden in print) */}
+            <Stack
+                className="no-print"
+                direction="column"
+                spacing={1.5}
+                sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1300 }}
+            >
+                <Tooltip title="Download PDF (custom layout)" placement="left">
+                    <Fab
+                        color="primary"
+                        aria-label="download pdf"
+                        onClick={handleDownloadPdf}
+                        disabled={pdfBusy}
+                    >
+                        {pdfBusy ? (
+                            <CircularProgress size={22} sx={{ color: 'accent.contrastText' }} />
+                        ) : (
+                            <PictureAsPdfIcon />
+                        )}
+                    </Fab>
+                </Tooltip>
+                <Tooltip title="Print (browser dialog)" placement="left">
+                    <Fab
+                        size="small"
+                        aria-label="print"
+                        onClick={() => window.print()}
+                        sx={{ bgcolor: 'hero.bg', color: 'hero.fg', '&:hover': { bgcolor: '#1a1a1a' } }}
+                    >
+                        <PrintIcon />
+                    </Fab>
+                </Tooltip>
+            </Stack>
         </Box>
     );
 }
