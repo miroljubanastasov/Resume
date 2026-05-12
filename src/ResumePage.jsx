@@ -416,11 +416,10 @@ export default function ResumePage({ data = resumeData }) {
             </Box>
 
             {/* ============ SKILLS + LANGUAGES band ============ */}
-            <Box sx={{ width: '100%', '@media print': PRINT_COLOR }}>
+            <Box sx={{ bgcolor: 'band.light', width: '100%', '@media print': PRINT_COLOR }}>
                 <Box
                     className="print-band"
                     sx={{
-                        bgcolor: 'band.light',
                         maxWidth: L.contentMaxWidth,
                         mx: 'auto',
                         px: L.bandPadX,
@@ -448,11 +447,10 @@ export default function ResumePage({ data = resumeData }) {
             </Box>
 
             {/* ============ EXPERIENCE + EDUCATION band ============ */}
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ bgcolor: 'band.page', width: '100%' }}>
                 <Box
                     className="print-band"
                     sx={{
-                        bgcolor: 'band.page',
                         maxWidth: L.contentMaxWidth,
                         mx: 'auto',
                         px: L.bandPadX,
