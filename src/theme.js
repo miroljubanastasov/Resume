@@ -28,6 +28,10 @@ const palette = {
         light: '#dadada', // skills/languages band
         page: '#FFFFFF', // experience/education band
     },
+    chip: {
+        main: '#2d2d2d', // dark gray for Strengths / CEFR badges
+        contrastText: '#FFFFFF',
+    },
     text: {
         primary: '#1A1A1A',
         secondary: '#5a5a5a',
@@ -67,6 +71,7 @@ const theme = createTheme({
         hero: palette.hero,
         accent: palette.accent,
         band: palette.band,
+        chip: palette.chip,
     },
     resume: {
         layout,
@@ -93,6 +98,17 @@ const theme = createTheme({
                 root: {
                     fontSize: '0.72rem',
                     fontWeight: 600,
+                    backgroundColor: palette.chip.main,
+                    color: palette.chip.contrastText,
+                    maxWidth: '100%',
+                    height: 'auto',
+                    minHeight: 22,
+                },
+                label: {
+                    whiteSpace: 'normal',
+                    lineHeight: 1.2,
+                    paddingTop: 2,
+                    paddingBottom: 2,
                 },
             },
         },

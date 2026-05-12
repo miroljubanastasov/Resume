@@ -35,6 +35,8 @@ export function buildPdfStyles(theme) {
     const heroFg = theme?.palette?.hero?.fg ?? '#FFFFFF';
     const heroMuted = '#cfcfcf';
     const bandLight = theme?.palette?.band?.light ?? '#dadada';
+    const chipBg = theme?.palette?.chip?.main ?? '#2d2d2d';
+    const chipFg = theme?.palette?.chip?.contrastText ?? '#FFFFFF';
     const textPrimary = theme?.palette?.text?.primary ?? '#1A1A1A';
     const textSecondary = theme?.palette?.text?.secondary ?? '#5a5a5a';
 
@@ -45,6 +47,8 @@ export function buildPdfStyles(theme) {
         heroFg,
         heroMuted,
         bandLight,
+        chipBg,
+        chipFg,
         textPrimary,
         textSecondary,
     };
@@ -191,8 +195,8 @@ function makeSheet(c) {
             flexWrap: 'wrap',
         },
         chip: {
-            backgroundColor: c.heroBg,
-            color: c.heroFg,
+            backgroundColor: c.chipBg,
+            color: c.chipFg,
             fontSize: 7.5,
             fontFamily: 'Helvetica-Bold',
             paddingVertical: 2,
@@ -216,8 +220,8 @@ function makeSheet(c) {
             borderRadius: 1,
         },
         cefrChip: {
-            backgroundColor: c.heroBg,
-            color: c.heroFg,
+            backgroundColor: c.chipBg,
+            color: c.chipFg,
             fontSize: 7,
             fontFamily: 'Helvetica-Bold',
             paddingVertical: 1.5,

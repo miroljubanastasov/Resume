@@ -173,13 +173,9 @@ function SkillCategory({ category, items }) {
             {hasLevels ? (
                 items.map((it) => <SkillBar key={it.name} label={it.name} level={it.level ?? 0} />)
             ) : (
-                <Stack direction="row" flexWrap="wrap" gap={0.5}>
+                <Stack direction="row" flexWrap="wrap" gap={0.5} sx={{ maxWidth: '100%' }}>
                     {items.map((it) => (
-                        <Chip
-                            key={it.name}
-                            label={it.name}
-                            sx={{ bgcolor: 'secondary.main', color: 'secondary.contrastText' }}
-                        />
+                        <Chip key={it.name} label={it.name} />
                     ))}
                 </Stack>
             )}
@@ -197,8 +193,6 @@ function LanguageRow({ label, level, cefr }) {
                 <Chip
                     label={cefr}
                     sx={{
-                        bgcolor: 'secondary.main',
-                        color: 'secondary.contrastText',
                         height: 20,
                         fontSize: '0.7rem',
                         fontWeight: 700,
