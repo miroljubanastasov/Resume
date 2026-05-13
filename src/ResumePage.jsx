@@ -85,7 +85,31 @@ function ContactRow({ icon, value, dark }) {
     );
 }
 
-function TimelineItem({ period, title, subtitle, location, bullets }) {
+function TimelineSubsection({ label, children }) {
+    return (
+        <Box sx={{ mt: 1 }}>
+            <Typography
+                variant="caption"
+                sx={{
+                    display: 'block',
+                    fontWeight: 800,
+                    letterSpacing: 1.2,
+                    textTransform: 'uppercase',
+                    color: 'accent.soft',
+                    fontSize: '0.68rem',
+                    mb: 0.3,
+                }}
+            >
+                {label}
+            </Typography>
+            {children}
+        </Box>
+    );
+}
+
+function TimelineItem({ period, title, subtitle, location, responsibilities, notableProjects, achievements }) {
+    const hasProjects = notableProjects && notableProjects.length > 0;
+    const hasAchievements = achievements && achievements.length > 0;
     return (
         <Box className="avoid-break" sx={{ position: 'relative', pl: 3, pb: 2.5, breakInside: 'avoid' }}>
             <Box
@@ -126,15 +150,86 @@ function TimelineItem({ period, title, subtitle, location, bullets }) {
                     </Box>
                 )}
             </Typography>
-            {bullets && bullets.length > 0 && (
-                <Box
-                    component="ul"
-                    sx={{ pl: 2.5, m: 0, '& li': { fontSize: '0.875rem', lineHeight: 1.5 } }}
-                >
-                    {bullets.map((b, i) => (
-                        <li key={i}>{b}</li>
-                    ))}
-                </Box>
+            {responsibilities && (
+                <TimelineSubsection label="Responsibilities">
+                    <Typography variant="body2" sx={{ fontSize: '0.875rem', lineHeight: 1.5 }}>
+                        {responsibilities}
+                    </Typography>
+                </TimelineSubsection>
+            )}
+            {hasProjects && (
+                <TimelineSubsection label="Notable projects">
+                    <Box
+                        component="ul"
+                        sx={{ pl: 2.5, m: 0, '& li': { fontSize: '0.875rem', lineHeight: 1.5 } }}
+                    >
+                        {notableProjects.map((p, i) => (
+                            <li key={i}>{p}</li>
+                        ))}
+                    </Box>
+                </TimelineSubsection>
+            )}
+            {hasAchievements && (
+                <TimelineSubsection label="Achievements">
+                    <Box
+                        component="ul"
+                        sx={{ pl: 2.5, m: 0, '& li': { fontSize: '0.875rem', lineHeight: 1.5 } }}
+                    >
+                        {achievements.map((a, i) => (
+                            <li key={i}>{a}</li>
+                        ))}
+                    </Box>
+                </TimelineSubsection>
+            )}
+        </Box>
+    );
+}
+
+function EducationItem({ period, title, subtitle, location, description }) {
+    return (
+        <Box className="avoid-break" sx={{ position: 'relative', pl: 3, pb: 2.5, breakInside: 'avoid' }}>
+            <Box
+                sx={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 6,
+                    width: 10,
+                    height: 10,
+                    borderRadius: '50%',
+                    bgcolor: 'accent.main',
+                }}
+            />
+            <Box
+                sx={{
+                    position: 'absolute',
+                    left: 4,
+                    top: 18,
+                    bottom: 0,
+                    width: '2px',
+                    bgcolor: 'rgba(0,0,0,0.1)',
+                }}
+            />
+            <Typography
+                variant="caption"
+                sx={{ color: 'accent.soft', fontWeight: 800, letterSpacing: 1.5 }}
+            >
+                {period}
+            </Typography>
+            <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.2 }}>
+                {title}
+            </Typography>
+            <Typography variant="body2" sx={{ color: 'accent.soft', mb: 0.5 }}>
+                {subtitle}
+                {location && (
+                    <Box component="span" sx={{ ml: 1 }}>
+                        · {location}
+                    </Box>
+                )}
+            </Typography>
+            {description && (
+                <Typography variant="body2" sx={{ fontSize: '0.875rem', lineHeight: 1.5 }}>
+                    {description}
+                </Typography>
             )}
         </Box>
     );
@@ -462,7 +557,9 @@ export default function ResumePage({ data = resumeData }) {
                                 title={e.title}
                                 subtitle={e.organization}
                                 location={e.location}
-                                bullets={e.bullets}
+                                responsibilities={e.responsibilities}
+                                notableProjects={e.notableProjects}
+                                achievements={e.achievements}
                             />
                         ))}
                     </Box>
@@ -472,13 +569,13 @@ export default function ResumePage({ data = resumeData }) {
                             Education & Certificates
                         </SectionTitle>
                         {education.map((e, idx) => (
-                            <TimelineItem
+                            <EducationItem
                                 key={idx}
                                 period={e.period}
                                 title={e.title}
                                 subtitle={e.organization}
                                 location={e.location}
-                                bullets={e.bullets}
+                                description={e.description}
                             />
                         ))}
                     </Box>

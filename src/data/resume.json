@@ -3,7 +3,7 @@
         "fullName": "Miroljub Anastasov",
         "title": "ARCHITECT",
         "photo": "Miroljub Photo.jpg",
-        "summary": "Architect, computational designer with 15 years of experience in leading design teams and delivering innovative architectural solutions. Skilled in Revit, Rhino, Grasshopper, Python, and C#. Proven track record of successful capital projects across various sectors. Passionate about computational design and leveraging technology to enhance architectural outcomes.",
+        "summary": "Architect and computational designer with 15 years of experience leading design teams and delivering innovative architectural solutions. Skilled in Revit, Rhino, Grasshopper, Python, and C#. Proven track record of successful capital projects across various sectors. Passionate about computational design and leveraging technology to enhance architectural outcomes.",
         "contact": {
             "phone": "+49 162 950 22 40",
             "email": "miroljub.a@gmail.com",
@@ -105,47 +105,57 @@
     "experience": [
         {
             "period": "2024 — PRESENT",
-            "title": "Principle Architect/ Advanced Technology Lead",
+            "title": "Principal Architect / Advanced Technology Lead",
             "organization": "Dbom",
             "location": "Remote, Germany",
-            "bullets": [
-                "Key responsibility — lead design teams across projects, drive computational design initiatives, and oversee BIM implementation.",
-                "[ Notable project or scope — building type, m², budget ]",
-                "Achievement — award, recognition, measurable outcome"
-            ]
+            "responsibilities": "Lead multidisciplinary design and BIM teams across international projects, define delivery strategies, and drive the adoption of advanced technology across design workflows. Oversee BIM coordination, develop computational design solutions for complex master plan and retail projects, and support optimization, automation, and quality control from concept through delivery.",
+            "notableProjects": [
+                "Renovation BIM modeling for Berlin Stadtbibliothek, Germany (20,000 m²), leading the BIM and architectural team.",
+                "Computational design and design optimization consultancy for master plan components in the Trojena mountain development in Saudi Arabia.",
+                "Computational design and design optimization for a large retail project in Dubai, UAE."
+            ],
+            "achievements": []
         },
         {
             "period": "2022 — 2024",
-            "title": "Principle Architect/ Computational Designer",
+            "title": "Principal Architect / Computational Designer",
             "organization": "AXXIS",
             "location": "Serbia",
-            "bullets": [
-                "Design development. Concept design, computation design, leading team of architects and designers. Face clients and consultants.",
-                "",
-                "Successful competition entry for capital government master-plan project in Abu Dhabi, UAE.",
-                "Mentored junior architects and led BIM standards."
-            ]
+            "responsibilities": "Led concept design and design development for mixed-use, master plan, and residential projects, coordinating architects, clients, and consultants throughout all project stages. Developed computational design and scripting workflows to support design optimization, automate repetitive tasks, and improve efficiency, accuracy, and overall design quality.",
+            "notableProjects": [
+                "Successful competition entry for a major government master plan project in Abu Dhabi, UAE.",
+                "Concept design of a mixed-use development in Abu Dhabi, UAE.",
+                "Computational design and design optimization consultancy for master plan components in the Trojena mountain development in Saudi Arabia.",
+                "Concept design and design development of several private residential projects in Dubai, UAE."
+            ],
+            "achievements": []
         },
         {
             "period": "2017 — 2022",
             "title": "Architect, Senior Associate",
             "organization": "Aedas",
             "location": "Dubai, United Arab Emirates",
-            "bullets": [
-                "Concept design, computation design, leading tem of architects and designers. Face clients and consultants.",
-                "Leading the competition design and development of the following stages of award winning Ski Village, mixed use development in saudi Arabia. (255.000 m²)",
-                "Leading the design of 3 winning hotels competitions in Suadi Arabia (~20.000 m² each).",
-                "Lead the design of award winning, LEED platinum, petrol station project in Dubai EXPO.",
-                "Achievement — shortlisted MENA young architect of the year."
+            "responsibilities": "Led concept and computational design work for large-scale mixed-use, hospitality, and infrastructure projects across the Middle East. Managed design teams, coordinated with clients and consultants, and translated competition-winning concepts into robust design development packages.",
+            "notableProjects": [
+                "Winning competition design of the Ski Village mixed-use development in Saudi Arabia (255,000 m² GFA).",
+                "Design development of the Ski Village mixed-use development in Saudi Arabia (255,000 m² GFA).",
+                "Winning design of three hotel competitions in Saudi Arabia (~20,000 m² each) and design development.",
+                "Design of the award-winning, LEED Platinum petrol station project at Dubai EXPO."
+            ],
+            "achievements": [
+                "Shortlisted, MENA Young Architect of the Year."
             ]
         },
         {
             "period": "2015 — 2017",
-            "title": "Senior Architect",
+            "title": "Architect",
             "organization": "Shape Architects Practice and Research",
             "location": "Dubai, United Arab Emirates",
-            "bullets": [
-                "Drafting, 3D modeling, visualization support."
+            "responsibilities": "Contributed to concept design, computational design, and BIM development across cultural, educational, and institutional projects. Prepared client-facing presentations, supported design coordination, and developed digital models to advance projects from early design through presentation.",
+            "notableProjects": [
+                "Emirates Diplomatic Academy, Abu Dhabi, UAE (18,000 m²). Government education facility.",
+                "Barjeel Gallery, Sharjah, UAE (2,000 m²). Art gallery.",
+                "Sharjah Science Museum Renovation, Sharjah, UAE (7,000 m²). Museum."
             ]
         }
     ],
@@ -153,32 +163,30 @@
         {
             "period": "2003 — 2013",
             "title": "Master in Architecture (M.Arch)",
-            "organization": "Faculty of Civil Engineering and Architecture - University of Niš",
+            "organization": "Faculty of Civil Engineering and Architecture — University of Niš",
             "location": "Niš, Serbia",
-            "bullets": [
-                "Master engineer of architecture, who possess adequate knowledge and skills in field of architecture and town planning"
-            ]
+            "description": "Master engineer of architecture with knowledge and skills in architecture and town planning."
         },
         {
             "period": "2016",
             "title": "Certified Revit Professional",
             "organization": "Autodesk",
             "location": "Dubai, United Arab Emirates",
-            "bullets": []
+            "description": ""
         },
         {
             "period": "2012",
             "title": "Fachmann für erneuerbare Energiequellen",
             "organization": "WIFI, Serbia",
             "location": "Belgrade, Serbia",
-            "bullets": []
+            "description": ""
         },
         {
             "period": "2012",
             "title": "Fachmann für Bau der Niedrigenergie- und Passivhäuser",
             "organization": "WIFI, Serbia",
             "location": "Belgrade, Serbia",
-            "bullets": []
+            "description": ""
         }
     ]
 }

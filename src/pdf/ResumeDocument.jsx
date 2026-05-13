@@ -280,11 +280,12 @@ function makeSheet(c) {
         /* BODY (experience + education) */
         body: {
             paddingVertical: 32,
-            paddingHorizontal: 32,
+            paddingLeft: 32,
+            paddingRight: 32,
             backgroundColor: '#FFFFFF',
         },
         bodySection: {
-            marginBottom: 10,
+            marginBottom: 32,
         },
         timelineItem: {
             position: 'relative',
@@ -340,6 +341,32 @@ function makeSheet(c) {
             fontSize: 8.5,
             color: c.textPrimary,
             lineHeight: 1.4,
+        },
+        subLabel: {
+            color: c.accentSoft,
+            fontFamily: 'Helvetica-Bold',
+            fontSize: 7,
+            letterSpacing: 1.1,
+            textTransform: 'uppercase',
+            marginTop: 3,
+            marginBottom: 1,
+        },
+        subBody: {
+            fontSize: 8.5,
+            color: c.textPrimary,
+            lineHeight: 1.4,
+        },
+        subColumns: {
+            flexDirection: 'row',
+            marginTop: 2,
+        },
+        subColLeft: {
+            flex: 1,
+            paddingRight: 8,
+        },
+        subColRight: {
+            flex: 1,
+            paddingLeft: 8,
         },
 
         /* FOOTER */
@@ -454,7 +481,19 @@ function LanguageRow({ name, level, cefr, styles, colors }) {
     );
 }
 
-function TimelineItem({ period, title, organization, location, bullets, styles }) {
+function TimelineItem({
+    period,
+    title,
+    organization,
+    location,
+    responsibilities,
+    notableProjects,
+    achievements,
+    styles,
+}) {
+    const hasProjects = notableProjects && notableProjects.length > 0;
+    const hasAchievements = achievements && achievements.length > 0;
+    const hasRightColumn = hasProjects || hasAchievements;
     return (
         <View style={styles.timelineItem} wrap={false}>
             <View style={styles.timelineDot} />
@@ -465,12 +504,58 @@ function TimelineItem({ period, title, organization, location, bullets, styles }
                 {organization}
                 {location ? `  ·  ${location}` : ''}
             </Text>
-            {bullets?.map((b, i) => (
-                <View key={i} style={styles.bullet}>
-                    <Text style={styles.bulletDot}>•</Text>
-                    <Text style={styles.bulletText}>{b}</Text>
+            <View style={styles.subColumns}>
+                <View style={styles.subColLeft}>
+                    {responsibilities ? (
+                        <>
+                            <Text style={styles.subLabel}>Responsibilities</Text>
+                            <Text style={styles.subBody}>{responsibilities}</Text>
+                        </>
+                    ) : null}
                 </View>
-            ))}
+                {hasRightColumn && (
+                    <View style={styles.subColRight}>
+                        {hasProjects && (
+                            <>
+                                <Text style={styles.subLabel}>Notable projects</Text>
+                                {notableProjects.map((p, i) => (
+                                    <View key={i} style={styles.bullet}>
+                                        <Text style={styles.bulletDot}>•</Text>
+                                        <Text style={styles.bulletText}>{p}</Text>
+                                    </View>
+                                ))}
+                            </>
+                        )}
+                        {hasAchievements && (
+                            <>
+                                <Text style={styles.subLabel}>Achievements</Text>
+                                {achievements.map((a, i) => (
+                                    <View key={i} style={styles.bullet}>
+                                        <Text style={styles.bulletDot}>•</Text>
+                                        <Text style={styles.bulletText}>{a}</Text>
+                                    </View>
+                                ))}
+                            </>
+                        )}
+                    </View>
+                )}
+            </View>
+        </View>
+    );
+}
+
+function EducationItem({ period, title, organization, location, description, styles }) {
+    return (
+        <View style={styles.timelineItem} wrap={false}>
+            <View style={styles.timelineDot} />
+            <View style={styles.timelineLine} />
+            <Text style={styles.period}>{period}</Text>
+            <Text style={styles.roleTitle}>{title}</Text>
+            <Text style={styles.orgLine}>
+                {organization}
+                {location ? `  ·  ${location}` : ''}
+            </Text>
+            {description ? <Text style={styles.subBody}>{description}</Text> : null}
         </View>
     );
 }
@@ -598,11 +683,11 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                                 Education & training
                             </SectionTitle>
                             {education.length > 0 && (
-                                <TimelineItem {...education[0]} styles={styles} />
+                                <EducationItem {...education[0]} styles={styles} />
                             )}
                         </View>
                         {education.slice(1).map((e, i) => (
-                            <TimelineItem key={i} {...e} styles={styles} />
+                            <EducationItem key={i} {...e} styles={styles} />
                         ))}
                     </View>
                 </View>
