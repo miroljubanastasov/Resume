@@ -3,12 +3,11 @@
         "fullName": "Miroljub Anastasov",
         "title": "ARCHITECT",
         "photo": "Miroljub Photo.jpg",
-        "summary": "Architect designer, computational designer with 15 years of experience in leading design teams and delivering innovative architectural solutions. Skilled in Revit, Rhino, Grasshopper, Python, and C#. Proven track record of successful projects across various sectors, including hospitality, mixed-use developments, and urban planning. Passionate about sustainable design and leveraging technology to enhance architectural outcomes.",
+        "summary": "Architect, computational designer with 15 years of experience in leading design teams and delivering innovative architectural solutions. Skilled in Revit, Rhino, Grasshopper, Python, and C#. Proven track record of successful capital projects across various sectors. Passionate about computational design and leveraging technology to enhance architectural outcomes.",
         "contact": {
             "phone": "+49 162 950 22 40",
             "email": "miroljub.a@gmail.com",
-            "address": "Fürther Straße, 90513 Zirndorf, Germany",
-            "website": "https://miroljubanastasov.github.io/Resume/"
+            "address": "Fürther Straße 57, 90513 Zirndorf, Deutschland"
         }
     },
     "languages": [
@@ -28,7 +27,7 @@
             "category": "Software",
             "items": [
                 {
-                    "name": "Revit / BIM",
+                    "name": "Revit",
                     "level": 5
                 },
                 {
@@ -40,11 +39,11 @@
                     "level": 5
                 },
                 {
-                    "name": "C# / .NET",
+                    "name": "C#",
                     "level": 5
                 },
                 {
-                    "name": "JavaScript / React",
+                    "name": "JavaScript",
                     "level": 4
                 },
                 {

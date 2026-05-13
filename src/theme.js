@@ -14,7 +14,7 @@ import { createTheme } from '@mui/material/styles';
 
 const palette = {
     hero: {
-        bg: '#030303',
+        bg: 'rgb(3, 3, 3)',
         fg: '#FFFFFF',
         fgMuted: 'rgba(255,255,255,0.78)',
         photoBg: '#0c0c0c',
@@ -39,7 +39,7 @@ const palette = {
 };
 
 const layout = {
-    contentMaxWidth: 1200,
+    contentMaxWidth: 1024,
     heroMinHeight: { xs: 320, sm: 460 },
     bandPadY: { xs: 4, sm: 6 },
     bandPadX: { xs: 3, sm: 6, md: 8 },
@@ -97,7 +97,7 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     fontSize: '0.72rem',
-                    fontWeight: 600,
+                    fontWeight: 300,
                     backgroundColor: palette.chip.main,
                     color: palette.chip.contrastText,
                     maxWidth: '100%',

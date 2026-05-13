@@ -5,8 +5,38 @@ import {
     Text,
     View,
     Image,
-    Font,
+    Svg,
+    Circle,
+    Path,
 } from '@react-pdf/renderer';
+
+// Material-icon SVG paths (24x24 viewBox), used inside section title badges.
+const ICON_PATHS = {
+    Software:
+        'M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z',
+    Professional:
+        'M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z',
+    Strengths:
+        'M20.2 4h-2.39c.13-.31.19-.65.19-1 0-1.66-1.34-3-3-3-1.06 0-1.99.55-2.53 1.37L12 2.46l-.47-.59C10.99.55 10.06 0 9 0 7.34 0 6 1.34 6 3c0 .35.07.69.19 1H4l-2 9c0 1.1.9 2 2 2v6c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-6c1.1 0 2-.9 2-2l-1.8-9zM15 2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm9 18H6v-6h12v6zm2-8H4l1.21-6h13.58L20 12z',
+    Languages:
+        'M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z',
+    Work:
+        'M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z',
+    Education:
+        'M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z',
+    Phone:
+        'M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z',
+    Email:
+        'M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z',
+    Address:
+        'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
+    Website:
+        'M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z',
+    LinkedIn:
+        'M19 3H5c-1.11 0-2 .89-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.89 2-2V5c0-1.11-.9-2-2-2zM9 17H6.48v-7H9v7zM7.74 8.74c-.83 0-1.5-.68-1.5-1.5s.67-1.5 1.5-1.5 1.5.68 1.5 1.5-.67 1.5-1.5 1.5zM18 17h-2.5v-3.94c0-.94-.39-1.27-.89-1.27-.51 0-1.11.34-1.11 1.29V17H11v-7h2.39v.97c.24-.45.97-1.21 2.04-1.21 1.16 0 2.57.68 2.57 2.94V17z',
+    Cake:
+        'M12 6c1.11 0 2-.9 2-2 0-.38-.1-.73-.29-1.03L12 0l-1.71 2.97c-.19.3-.29.65-.29 1.03 0 1.1.9 2 2 2zm4.6 9.99l-1.07-1.07-1.08 1.07c-1.3 1.3-3.58 1.31-4.89 0l-1.07-1.07-1.09 1.07C6.75 16.64 5.88 17 4.96 17c-.73 0-1.4-.23-1.96-.61V21c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-4.61c-.56.38-1.23.61-1.96.61-.92 0-1.79-.36-2.44-1.01zM18 9h-5V7h-2v2H6c-1.66 0-3 1.34-3 3v1.54c0 1.08.88 1.96 1.96 1.96.52 0 1.02-.2 1.38-.57l2.14-2.13 2.13 2.13c.74.74 2.03.74 2.77 0l2.14-2.13 2.13 2.13c.37.37.86.57 1.38.57 1.08 0 1.96-.88 1.96-1.96V12c0-1.66-1.34-3-3-3z',
+};
 
 /**
  * Custom PDF document for the resume.
@@ -60,8 +90,10 @@ function makeSheet(c) {
             backgroundColor: '#FFFFFF',
             color: c.textPrimary,
             fontFamily: 'Helvetica',
-            fontSize: 9,
+            fontSize: 9.5,
             lineHeight: 1.4,
+            paddingTop: 32,
+            paddingBottom: 32,
         },
 
         /* HERO */
@@ -69,18 +101,29 @@ function makeSheet(c) {
             flexDirection: 'row',
             backgroundColor: c.heroBg,
             color: c.heroFg,
+            marginTop: -32, // cancel Page paddingTop so hero bleeds to the top edge
+            position: 'relative',
+        },
+        heroLightener: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(255,255,255,0)',
         },
         heroLeft: {
             flex: 1.15,
-            padding: 24,
+            paddingVertical: 28,
+            paddingHorizontal: 32,
             justifyContent: 'center',
         },
         heroQr: {
             position: 'absolute',
-            top: 12,
-            right: 12,
-            width: 56,
-            height: 56,
+            top: 10,
+            right: 10,
+            width: 46,
+            height: 46,
             padding: 3,
             backgroundColor: '#0a0a0a',
             borderRadius: 3,
@@ -93,26 +136,30 @@ function makeSheet(c) {
             flex: 1,
             position: 'relative',
             backgroundColor: '#0c0c0c',
+            alignSelf: 'stretch',
         },
         heroPhoto: {
-            width: '100%',
-            height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
             objectFit: 'cover',
             objectPosition: 'center top',
         },
         title: {
             color: c.accent,
             fontFamily: 'Helvetica-Bold',
-            fontSize: 9,
+            fontSize: 8.5,
             letterSpacing: 3,
-            marginBottom: 6,
+            marginBottom: 12,
         },
         name: {
             color: c.heroFg,
             fontFamily: 'Helvetica-Bold',
-            fontSize: 26,
-            letterSpacing: -0.5,
-            marginBottom: 12,
+            fontSize: 32,
+            letterSpacing: -1.0,
+            marginBottom: 32,
         },
         rule: {
             width: 48,
@@ -122,9 +169,9 @@ function makeSheet(c) {
         },
         summary: {
             color: c.heroMuted,
-            fontSize: 9,
-            lineHeight: 1.6,
-            marginBottom: 14,
+            fontSize: 8.5,
+            lineHeight: 1.45,
+            marginBottom: 8,
             maxWidth: 320,
         },
         contactRow: {
@@ -132,11 +179,9 @@ function makeSheet(c) {
             alignItems: 'center',
             marginBottom: 3,
         },
-        contactDot: {
-            width: 4,
-            height: 4,
-            borderRadius: 2,
-            backgroundColor: c.accent,
+        contactIcon: {
+            width: 10,
+            height: 10,
             marginRight: 6,
         },
         contactText: {
@@ -149,45 +194,45 @@ function makeSheet(c) {
             flexDirection: 'row',
             backgroundColor: c.bandLight,
             paddingVertical: 18,
-            paddingHorizontal: 24,
+            paddingHorizontal: 28,
         },
         skillsCol: {
             flex: 1,
-            paddingHorizontal: 6,
+            paddingHorizontal: 5,
         },
         sectionTitle: {
             flexDirection: 'row',
             alignItems: 'center',
             marginBottom: 8,
         },
-        sectionBadge: {
-            width: 16,
-            height: 16,
-            borderRadius: 8,
-            backgroundColor: c.accent,
-            marginRight: 6,
+        sectionRule: {
+            flex: 1,
+            height: 1,
+            marginLeft: 8,
+            backgroundColor: 'rgba(0,0,0,0.12)',
         },
         sectionLabel: {
             fontFamily: 'Helvetica-Bold',
             fontSize: 9,
-            letterSpacing: 2,
+            letterSpacing: 1.8,
             color: c.textPrimary,
             textTransform: 'uppercase',
+            marginLeft: 7,
         },
-        skillRow: { marginBottom: 6 },
+        skillRow: { marginBottom: 3 },
         skillTopRow: {
             flexDirection: 'row',
             justifyContent: 'space-between',
             marginBottom: 2,
         },
-        skillName: { fontSize: 8.5 },
+        skillName: { fontSize: 8 },
         skillSegments: {
             flexDirection: 'row',
             gap: 2,
         },
         skillSegment: {
             flex: 1,
-            height: 3,
+            height: 2.5,
             borderRadius: 1,
         },
         chipRow: {
@@ -197,26 +242,27 @@ function makeSheet(c) {
         chip: {
             backgroundColor: c.chipBg,
             color: c.chipFg,
-            fontSize: 7.5,
+            fontSize: 7,
             fontFamily: 'Helvetica-Bold',
-            paddingVertical: 2,
-            paddingHorizontal: 6,
-            borderRadius: 9,
-            marginRight: 4,
-            marginBottom: 4,
+            paddingTop: 2,
+            paddingBottom: 2,
+            paddingHorizontal: 5,
+            borderRadius: 8,
+            marginRight: 3,
+            marginBottom: 3,
+            lineHeight: 1,
         },
-        langRow: { marginBottom: 7 },
+        langRow: { marginBottom: 4 },
         langTopRow: {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: 3,
+            marginBottom: 2,
         },
-        langDots: { flexDirection: 'row' },
+        langDots: { flexDirection: 'row', gap: 2 },
         langDot: {
-            width: 16,
-            height: 3,
-            marginRight: 2,
+            flex: 1,
+            height: 2.5,
             borderRadius: 1,
         },
         cefrChip: {
@@ -224,29 +270,26 @@ function makeSheet(c) {
             color: c.chipFg,
             fontSize: 7,
             fontFamily: 'Helvetica-Bold',
-            paddingVertical: 1.5,
+            paddingTop: 2,
+            paddingBottom: 2,
             paddingHorizontal: 5,
             borderRadius: 8,
+            lineHeight: 1,
         },
 
         /* BODY (experience + education) */
         body: {
-            flexDirection: 'row',
-            padding: 24,
+            paddingVertical: 32,
+            paddingHorizontal: 32,
             backgroundColor: '#FFFFFF',
         },
-        bodyLeft: {
-            flex: 1.5,
-            paddingRight: 16,
-        },
-        bodyRight: {
-            flex: 1,
-            paddingLeft: 16,
+        bodySection: {
+            marginBottom: 10,
         },
         timelineItem: {
             position: 'relative',
             paddingLeft: 14,
-            marginBottom: 12,
+            marginBottom: 8,
         },
         timelineDot: {
             position: 'absolute',
@@ -270,7 +313,7 @@ function makeSheet(c) {
             fontFamily: 'Helvetica-Bold',
             fontSize: 7.5,
             letterSpacing: 1.2,
-            marginBottom: 2,
+            marginBottom: 1,
         },
         roleTitle: {
             fontFamily: 'Helvetica-Bold',
@@ -281,11 +324,11 @@ function makeSheet(c) {
         orgLine: {
             color: c.textSecondary,
             fontSize: 8.5,
-            marginBottom: 3,
+            marginBottom: 2,
         },
         bullet: {
             flexDirection: 'row',
-            marginBottom: 1.5,
+            marginBottom: 1,
         },
         bulletDot: {
             width: 6,
@@ -296,18 +339,45 @@ function makeSheet(c) {
             flex: 1,
             fontSize: 8.5,
             color: c.textPrimary,
-            lineHeight: 1.45,
+            lineHeight: 1.4,
+        },
+
+        /* FOOTER */
+        footer: {
+            position: 'absolute',
+            bottom: 20,
+            left: 32,
+            right: 32,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+        },
+        footerText: {
+            fontSize: 7,
+            color: c.textSecondary,
+            letterSpacing: 0.8,
         },
     });
 }
 
 /* ---------------- atoms ---------------- */
 
-function SectionTitle({ children, styles }) {
+function SectionTitle({ children, icon, styles, colors }) {
+    const size = 16;
     return (
         <View style={styles.sectionTitle}>
-            <View style={styles.sectionBadge} />
+            <Svg viewBox="0 0 24 24" style={{ width: size, height: size }}>
+                <Circle cx="12" cy="12" r="12" fill={colors.accent} />
+                {icon && (
+                    <Path
+                        d={icon}
+                        fill={colors.heroFg}
+                        transform="translate(4 4) scale(0.667)"
+                    />
+                )}
+            </Svg>
             <Text style={styles.sectionLabel}>{children}</Text>
+            <View style={styles.sectionRule} />
         </View>
     );
 }
@@ -336,7 +406,9 @@ function SkillCategory({ category, items, styles, colors }) {
     const hasLevels = items.some((i) => typeof i.level === 'number');
     return (
         <View style={styles.skillsCol} wrap={false}>
-            <SectionTitle styles={styles}>{category}</SectionTitle>
+            <SectionTitle styles={styles} colors={colors} icon={ICON_PATHS[category]}>
+                {category}
+            </SectionTitle>
             {hasLevels ? (
                 items.map((it) => (
                     <SkillBar
@@ -411,14 +483,20 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
     const { personal, languages, skills, experience, education } = data;
     const { contact } = personal;
 
+    const today = new Date().toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+    });
+
     const contacts = [
-        contact?.phone,
-        contact?.email,
-        contact?.address,
-        contact?.website,
-        contact?.linkedin,
-        contact?.dateOfBirth,
-    ].filter(Boolean);
+        { kind: 'Phone', value: contact?.phone },
+        { kind: 'Email', value: contact?.email },
+        { kind: 'Address', value: contact?.address },
+        { kind: 'Website', value: contact?.website },
+        { kind: 'LinkedIn', value: contact?.linkedin },
+        { kind: 'Cake', value: contact?.dateOfBirth },
+    ].filter((c) => c.value);
 
     return (
         <Document
@@ -427,6 +505,18 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
             subject="Curriculum Vitae"
         >
             <Page size="A4" style={styles.page}>
+
+                {/* FOOTER (repeats on every page) */}
+                <View style={styles.footer} fixed>
+                    <Text style={styles.footerText}>{today}</Text>
+                    <Text
+                        style={styles.footerText}
+                        render={({ pageNumber, totalPages }) =>
+                            `Page ${pageNumber} of ${totalPages}`
+                        }
+                    />
+                </View>
+
                 {/* HERO */}
                 <View style={styles.hero}>
                     <View style={styles.heroLeft}>
@@ -437,20 +527,24 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                             <Text style={styles.summary}>{personal.summary}</Text>
                         )}
                         {contacts.map((c) => (
-                            <View key={c} style={styles.contactRow}>
-                                <View style={styles.contactDot} />
-                                <Text style={styles.contactText}>{c}</Text>
+                            <View key={c.value} style={styles.contactRow}>
+                                <Svg viewBox="0 0 24 24" style={styles.contactIcon}>
+                                    <Path d={ICON_PATHS[c.kind]} fill={colors.accent} />
+                                </Svg>
+                                <Text style={styles.contactText}>{c.value}</Text>
                             </View>
                         ))}
                     </View>
                     <View style={styles.heroRight}>
+                        {photoUrl && <Image src={photoUrl} style={styles.heroPhoto} />}
                         {qrDataUrl && (
                             <View style={styles.heroQr}>
                                 <Image src={qrDataUrl} style={styles.heroQrImage} />
                             </View>
                         )}
-                        {photoUrl && <Image src={photoUrl} style={styles.heroPhoto} />}
                     </View>
+                    {/* Print-friendly lightener: 25% white overlay on top of hero */}
+                    <View style={styles.heroLightener} />
                 </View>
 
                 {/* SKILLS BAND */}
@@ -466,7 +560,9 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                     ))}
                     {languages?.length > 0 && (
                         <View style={styles.skillsCol} wrap={false}>
-                            <SectionTitle styles={styles}>Languages</SectionTitle>
+                            <SectionTitle styles={styles} colors={colors} icon={ICON_PATHS.Languages}>
+                                Languages
+                            </SectionTitle>
                             {languages.map((l) => (
                                 <LanguageRow
                                     key={l.name}
@@ -481,17 +577,31 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                     )}
                 </View>
 
-                {/* BODY */}
+                {/* BODY: Work experience then Education, one after the other */}
                 <View style={styles.body}>
-                    <View style={styles.bodyLeft}>
-                        <SectionTitle styles={styles}>Work experience</SectionTitle>
-                        {experience.map((e, i) => (
+                    <View style={styles.bodySection}>
+                        <View wrap={false}>
+                            <SectionTitle styles={styles} colors={colors} icon={ICON_PATHS.Work}>
+                                Work experience
+                            </SectionTitle>
+                            {experience.length > 0 && (
+                                <TimelineItem {...experience[0]} styles={styles} />
+                            )}
+                        </View>
+                        {experience.slice(1).map((e, i) => (
                             <TimelineItem key={i} {...e} styles={styles} />
                         ))}
                     </View>
-                    <View style={styles.bodyRight}>
-                        <SectionTitle styles={styles}>Education & training</SectionTitle>
-                        {education.map((e, i) => (
+                    <View style={styles.bodySection}>
+                        <View wrap={false}>
+                            <SectionTitle styles={styles} colors={colors} icon={ICON_PATHS.Education}>
+                                Education & training
+                            </SectionTitle>
+                            {education.length > 0 && (
+                                <TimelineItem {...education[0]} styles={styles} />
+                            )}
+                        </View>
+                        {education.slice(1).map((e, i) => (
                             <TimelineItem key={i} {...e} styles={styles} />
                         ))}
                     </View>

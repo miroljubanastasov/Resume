@@ -373,21 +373,7 @@ export default function ResumePage({ data = resumeData }) {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     sx={{
-                                        position: 'absolute',
-                                        top: 16,
-                                        right: 16,
-                                        zIndex: 1,
-                                        width: { xs: 56, sm: 72, md: 84 },
-                                        height: { xs: 56, sm: 72, md: 84 },
-                                        bgcolor: '#0a0a0a',
-                                        borderRadius: 1,
-                                        p: 0.5,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.35)',
-                                        textDecoration: 'none',
-                                        '@media print': { ...PRINT_COLOR, boxShadow: 'none' },
+                                        display: 'none',
                                     }}
                                 >
                                     <Box
