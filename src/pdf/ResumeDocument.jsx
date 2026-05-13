@@ -429,12 +429,12 @@ function SkillBar({ name, level, styles, colors }) {
     );
 }
 
-function SkillCategory({ category, items, styles, colors }) {
+function SkillCategory({ category, label, items, styles, colors }) {
     const hasLevels = items.some((i) => typeof i.level === 'number');
     return (
         <View style={styles.skillsCol} wrap={false}>
             <SectionTitle styles={styles} colors={colors} icon={ICON_PATHS[category]}>
-                {category}
+                {label ?? category}
             </SectionTitle>
             {hasLevels ? (
                 items.map((it) => (
@@ -490,6 +490,7 @@ function TimelineItem({
     notableProjects,
     achievements,
     styles,
+    labels,
 }) {
     const hasProjects = notableProjects && notableProjects.length > 0;
     const hasAchievements = achievements && achievements.length > 0;
@@ -508,7 +509,7 @@ function TimelineItem({
                 <View style={styles.subColLeft}>
                     {responsibilities ? (
                         <>
-                            <Text style={styles.subLabel}>Responsibilities</Text>
+                            <Text style={styles.subLabel}>{labels?.responsibilities ?? 'Responsibilities'}</Text>
                             <Text style={styles.subBody}>{responsibilities}</Text>
                         </>
                     ) : null}
@@ -517,7 +518,7 @@ function TimelineItem({
                     <View style={styles.subColRight}>
                         {hasProjects && (
                             <>
-                                <Text style={styles.subLabel}>Notable projects</Text>
+                                <Text style={styles.subLabel}>{labels?.notableProjects ?? 'Notable projects'}</Text>
                                 {notableProjects.map((p, i) => (
                                     <View key={i} style={styles.bullet}>
                                         <Text style={styles.bulletDot}>•</Text>
@@ -528,7 +529,7 @@ function TimelineItem({
                         )}
                         {hasAchievements && (
                             <>
-                                <Text style={styles.subLabel}>Achievements</Text>
+                                <Text style={styles.subLabel}>{labels?.achievements ?? 'Achievements'}</Text>
                                 {achievements.map((a, i) => (
                                     <View key={i} style={styles.bullet}>
                                         <Text style={styles.bulletDot}>•</Text>
@@ -562,13 +563,24 @@ function EducationItem({ period, title, organization, location, description, sty
 
 /* ---------------- document ---------------- */
 
-export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
+export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl, strings, locale }) {
     const colors = buildPdfStyles(theme);
     const styles = makeSheet(colors);
     const { personal, languages, skills, experience, education } = data;
     const { contact } = personal;
 
-    const today = new Date().toLocaleDateString('en-GB', {
+    const t = strings ?? {
+        workExperience: 'Work experience',
+        education: 'Education & training',
+        languages: 'Languages',
+        responsibilities: 'Responsibilities',
+        notableProjects: 'Notable projects',
+        achievements: 'Achievements',
+        pageOf: (n, total) => `Page ${n} of ${total}`,
+        categories: {},
+    };
+
+    const today = new Date().toLocaleDateString(locale === 'de' ? 'de-DE' : 'en-GB', {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
@@ -597,7 +609,9 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                     <Text
                         style={styles.footerText}
                         render={({ pageNumber, totalPages }) =>
-                            `Page ${pageNumber} of ${totalPages}`
+                            t.pageOf
+                                ? t.pageOf(pageNumber, totalPages)
+                                : `Page ${pageNumber} of ${totalPages}`
                         }
                     />
                 </View>
@@ -638,6 +652,7 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                         <SkillCategory
                             key={g.category}
                             category={g.category}
+                            label={t.categories?.[g.category] ?? g.category}
                             items={g.items}
                             styles={styles}
                             colors={colors}
@@ -646,7 +661,7 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                     {languages?.length > 0 && (
                         <View style={styles.skillsCol} wrap={false}>
                             <SectionTitle styles={styles} colors={colors} icon={ICON_PATHS.Languages}>
-                                Languages
+                                {t.languages}
                             </SectionTitle>
                             {languages.map((l) => (
                                 <LanguageRow
@@ -667,20 +682,20 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl }) {
                     <View style={styles.bodySection}>
                         <View wrap={false}>
                             <SectionTitle styles={styles} colors={colors} icon={ICON_PATHS.Work}>
-                                Work experience
+                                {t.workExperience}
                             </SectionTitle>
                             {experience.length > 0 && (
-                                <TimelineItem {...experience[0]} styles={styles} />
+                                <TimelineItem {...experience[0]} styles={styles} labels={t} />
                             )}
                         </View>
                         {experience.slice(1).map((e, i) => (
-                            <TimelineItem key={i} {...e} styles={styles} />
+                            <TimelineItem key={i} {...e} styles={styles} labels={t} />
                         ))}
                     </View>
                     <View style={styles.bodySection}>
                         <View wrap={false}>
                             <SectionTitle styles={styles} colors={colors} icon={ICON_PATHS.Education}>
-                                Education & training
+                                {t.education}
                             </SectionTitle>
                             {education.length > 0 && (
                                 <EducationItem {...education[0]} styles={styles} />

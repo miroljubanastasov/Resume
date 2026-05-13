@@ -1,0 +1,196 @@
+{
+    "personal": {
+        "fullName": "Miroljub Anastasov",
+        "title": "ARCHITEKT",
+        "photo": "Miroljub Photo.jpg",
+        "summary": "Architekt und computergestützter Designer mit 15 Jahren Erfahrung in der Leitung multidisziplinärer Teams und der Umsetzung komplexer Projekte in verschiedenen Sektoren. Verbindet Design-Leadership mit fundiertem Fachwissen in BIM, computergestütztem Design und Workflow-Automatisierung mit Revit, Rhino, Grasshopper, Python und C#. Nachgewiesene Erfolge in Konzeptentwurf, Entwurfsplanung und digitaler Innovation, die Projektqualität, Effizienz und Ergebnisse verbessern.",
+        "contact": {
+            "phone": "+49 162 950 22 40",
+            "email": "miroljub.a@gmail.com",
+            "address": "Fürther Straße 57, 90513 Zirndorf, Deutschland"
+        }
+    },
+    "languages": [
+        {
+            "name": "Englisch",
+            "level": 5,
+            "cefr": "Fließend"
+        },
+        {
+            "name": "Deutsch",
+            "level": 2,
+            "cefr": "Grundkenntnisse"
+        }
+    ],
+    "skills": [
+        {
+            "category": "Software",
+            "items": [
+                {
+                    "name": "Revit",
+                    "level": 5
+                },
+                {
+                    "name": "Rhino + Grasshopper",
+                    "level": 5
+                },
+                {
+                    "name": "Python",
+                    "level": 5
+                },
+                {
+                    "name": "C#",
+                    "level": 5
+                },
+                {
+                    "name": "JavaScript",
+                    "level": 4
+                },
+                {
+                    "name": "Enscape",
+                    "level": 5
+                },
+                {
+                    "name": "Adobe Creative Suite",
+                    "level": 4
+                }
+            ]
+        },
+        {
+            "category": "Professional",
+            "items": [
+                {
+                    "name": "Konzept- & Vorentwurf",
+                    "level": 5
+                },
+                {
+                    "name": "Computergestütztes Design & Scripting",
+                    "level": 5
+                },
+                {
+                    "name": "Ausführungsplanung",
+                    "level": 3
+                },
+                {
+                    "name": "Nachhaltiges / LEED Design",
+                    "level": 4
+                },
+                {
+                    "name": "Städtebau",
+                    "level": 3
+                }
+            ]
+        },
+        {
+            "category": "Strengths",
+            "items": [
+                {
+                    "name": "Teamplayer"
+                },
+                {
+                    "name": "Kreativ"
+                },
+                {
+                    "name": "Problemlöser"
+                },
+                {
+                    "name": "Innovativ"
+                },
+                {
+                    "name": "Mentoring"
+                },
+                {
+                    "name": "Systematisch"
+                },
+                {
+                    "name": "Analytisch"
+                }
+            ]
+        }
+    ],
+    "experience": [
+        {
+            "period": "2024 — HEUTE",
+            "title": "Leitender Architekt / Leiter Advanced Technology",
+            "organization": "Dbom",
+            "location": "Remote, Deutschland",
+            "responsibilities": "Leitung multidisziplinärer Design- und BIM-Teams in internationalen Projekten, Definition von Lieferstrategien und Förderung der Einführung fortschrittlicher Technologien in Entwurfsabläufen. Verantwortlich für BIM-Koordination, Entwicklung computergestützter Designlösungen für komplexe Masterplan- und Retailprojekte sowie Unterstützung bei Optimierung, Automatisierung und Qualitätskontrolle vom Konzept bis zur Übergabe.",
+            "notableProjects": [
+                "Sanierungs-BIM-Modellierung für die Stadtbibliothek Berlin, Deutschland, mit Leitung des BIM- und Architekturteams.",
+                "Beratung zu computergestütztem Design und Designoptimierung für Masterplan-Komponenten der Trojena Bergentwicklung in Saudi-Arabien.",
+                "Computergestütztes Design und Designoptimierung für ein großes Retailprojekt in Dubai, VAE."
+            ],
+            "achievements": []
+        },
+        {
+            "period": "2022 — 2024",
+            "title": "Leitender Architekt / Computational Designer",
+            "organization": "AXXIS",
+            "location": "Serbien",
+            "responsibilities": "Leitung von Konzeptentwurf und Entwurfsplanung für Mischnutzungs-, Masterplan- und Wohnprojekte sowie Koordination von Architekten, Bauherren und Fachplanern in allen Projektphasen. Entwicklung computergestützter Design- und Scripting-Workflows zur Designoptimierung, Automatisierung wiederkehrender Aufgaben und Verbesserung von Effizienz, Genauigkeit und Designqualität.",
+            "notableProjects": [
+                "Erfolgreiche Wettbewerbseingabe für ein bedeutendes Regierungs-Masterplanprojekt in Abu Dhabi, VAE.",
+                "Konzeptentwurf einer Mischnutzungsentwicklung in Abu Dhabi, VAE.",
+                "Beratung zu computergestütztem Design und Designoptimierung für Masterplan-Komponenten der Trojena Bergentwicklung in Saudi-Arabien.",
+                "Konzeptentwurf und Entwurfsplanung mehrerer privater Wohnprojekte in Dubai, VAE."
+            ],
+            "achievements": []
+        },
+        {
+            "period": "2017 — 2022",
+            "title": "Architekt, Senior Associate",
+            "organization": "Aedas",
+            "location": "Dubai, Vereinigte Arabische Emirate",
+            "responsibilities": "Leitung von Konzept- und computergestützten Designarbeiten für großmaßstäbliche Mischnutzungs-, Hotel- und Infrastrukturprojekte im Nahen Osten. Führung von Designteams, Koordination mit Bauherren und Fachplanern sowie Überführung von Wettbewerbskonzepten in belastbare Entwurfspakete.",
+            "notableProjects": [
+                "Wettbewerbsgewinn für die Mischnutzungsentwicklung Ski Village in Saudi-Arabien (255.000 m² BGF).",
+                "Entwurfsplanung der Mischnutzungsentwicklung Ski Village in Saudi-Arabien (255.000 m² BGF).",
+                "Gewinn von drei Hotelwettbewerben in Saudi-Arabien (~20.000 m² je) sowie Entwurfsplanung.",
+                "Entwurf der preisgekrönten LEED-Platinum-Tankstelle auf der EXPO Dubai."
+            ],
+            "achievements": []
+        },
+        {
+            "period": "2015 — 2017",
+            "title": "Architekt",
+            "organization": "Shape Architects Practice and Research",
+            "location": "Dubai, Vereinigte Arabische Emirate",
+            "responsibilities": "Mitarbeit an Konzeptentwurf, computergestütztem Design und BIM-Entwicklung für Kultur-, Bildungs- und Institutionsprojekte. Erstellung von Präsentationen für Bauherren, Unterstützung der Designkoordination und Entwicklung digitaler Modelle von frühen Entwurfsphasen bis zur Präsentation.",
+            "notableProjects": [
+                "Emirates Diplomatic Academy, Abu Dhabi, VAE (18.000 m²). Staatliche Bildungseinrichtung.",
+                "Barjeel Gallery, Sharjah, VAE (2.000 m²). Kunstgalerie.",
+                "Sanierung des Sharjah Science Museum, Sharjah, VAE (7.000 m²). Museum."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "period": "2003 — 2013",
+            "title": "Master in Architektur (M.Arch)",
+            "organization": "Fakultät für Bauingenieurwesen und Architektur — Universität Niš",
+            "location": "Niš, Serbien",
+            "description": "Master-Ingenieur der Architektur mit Kenntnissen und Fähigkeiten in Architektur und Stadtplanung."
+        },
+        {
+            "period": "2016",
+            "title": "Certified Revit Professional",
+            "organization": "Autodesk",
+            "location": "Dubai, Vereinigte Arabische Emirate",
+            "description": ""
+        },
+        {
+            "period": "2012",
+            "title": "Fachmann für erneuerbare Energiequellen",
+            "organization": "WIFI, Serbien",
+            "location": "Belgrad, Serbien",
+            "description": ""
+        },
+        {
+            "period": "2012",
+            "title": "Fachmann für Bau der Niedrigenergie- und Passivhäuser",
+            "organization": "WIFI, Serbien",
+            "location": "Belgrad, Serbien",
+            "description": ""
+        }
+    ]
+}

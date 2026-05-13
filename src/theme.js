@@ -46,7 +46,7 @@ const layout = {
     sectionRuleWidth: 64,
     sectionRuleHeight: 3,
     // Work experience is wider; adjust the ratio here to control proportions
-    experienceEducationColumns: '1.5fr 1fr',
+    experienceEducationColumns: '1fr 1fr',
 };
 
 const theme = createTheme({

@@ -6,9 +6,16 @@ import ResumeDocument from './ResumeDocument.jsx';
  * browser download. Keeps the heavy @react-pdf/renderer code out of the
  * critical render path because callers can dynamic-import this module.
  */
-export async function exportResumePdf({ data, theme, photoUrl, qrDataUrl, fileName }) {
+export async function exportResumePdf({ data, theme, photoUrl, qrDataUrl, fileName, strings, locale }) {
     const doc = (
-        <ResumeDocument data={data} theme={theme} photoUrl={photoUrl} qrDataUrl={qrDataUrl} />
+        <ResumeDocument
+            data={data}
+            theme={theme}
+            photoUrl={photoUrl}
+            qrDataUrl={qrDataUrl}
+            strings={strings}
+            locale={locale}
+        />
     );
     const blob = await pdf(doc).toBlob();
 

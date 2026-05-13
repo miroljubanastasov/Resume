@@ -3,7 +3,7 @@
         "fullName": "Miroljub Anastasov",
         "title": "ARCHITECT",
         "photo": "Miroljub Photo.jpg",
-        "summary": "Architect and computational designer with 15 years of experience leading design teams and delivering innovative architectural solutions. Skilled in Revit, Rhino, Grasshopper, Python, and C#. Proven track record of successful capital projects across various sectors. Passionate about computational design and leveraging technology to enhance architectural outcomes.",
+        "summary": "Architect and computational designer with 15 years of experience leading multidisciplinary teams and delivering complex projects across various sectors. Combines design leadership with advanced expertise in BIM, computational design, and workflow automation using Revit, Rhino, Grasshopper, Python, and C#. Proven track record in concept design, design development, and digital innovation that improves project quality, efficiency, and delivery outcomes.",
         "contact": {
             "phone": "+49 162 950 22 40",
             "email": "miroljub.a@gmail.com",
@@ -85,19 +85,25 @@
             "category": "Strengths",
             "items": [
                 {
-                    "name": "Leadership"
+                    "name": "Team Player"
                 },
                 {
-                    "name": "Creativity"
+                    "name": "Creative"
                 },
                 {
-                    "name": "Problem Solving"
+                    "name": "Problem Solver"
                 },
                 {
                     "name": "Innovative"
                 },
                 {
-                    "name": "Mentoring"
+                    "name": "Mentorship"
+                },
+                {
+                    "name": "Systematic"
+                },
+                {
+                    "name": "Analytical"
                 }
             ]
         }
@@ -110,7 +116,7 @@
             "location": "Remote, Germany",
             "responsibilities": "Lead multidisciplinary design and BIM teams across international projects, define delivery strategies, and drive the adoption of advanced technology across design workflows. Oversee BIM coordination, develop computational design solutions for complex master plan and retail projects, and support optimization, automation, and quality control from concept through delivery.",
             "notableProjects": [
-                "Renovation BIM modeling for Berlin Stadtbibliothek, Germany (20,000 m²), leading the BIM and architectural team.",
+                "Renovation BIM modeling for Berlin Stadtbibliothek, Germany, leading the BIM and architectural team.",
                 "Computational design and design optimization consultancy for master plan components in the Trojena mountain development in Saudi Arabia.",
                 "Computational design and design optimization for a large retail project in Dubai, UAE."
             ],
@@ -142,9 +148,7 @@
                 "Winning design of three hotel competitions in Saudi Arabia (~20,000 m² each) and design development.",
                 "Design of the award-winning, LEED Platinum petrol station project at Dubai EXPO."
             ],
-            "achievements": [
-                "Shortlisted, MENA Young Architect of the Year."
-            ]
+            "achievements": []
         },
         {
             "period": "2015 — 2017",

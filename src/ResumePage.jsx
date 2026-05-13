@@ -14,7 +14,45 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PersonIcon from '@mui/icons-material/Person';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import resumeData from './data/resume.json';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import resumeDataEn from './data/resume.json';
+import resumeDataDe from './data/resume.de.json';
+
+const DATA_BY_LOCALE = {
+    en: resumeDataEn,
+    de: resumeDataDe,
+};
+
+const UI_STRINGS = {
+    en: {
+        workExperience: 'Work experience',
+        education: 'Education & Certificates',
+        languages: 'Languages',
+        responsibilities: 'Responsibilities',
+        notableProjects: 'Notable projects',
+        achievements: 'Achievements',
+        categories: {
+            Software: 'Software',
+            Professional: 'Professional',
+            Strengths: 'Strengths',
+        },
+        downloadPdf: 'Download PDF',
+    },
+    de: {
+        workExperience: 'Berufserfahrung',
+        education: 'Ausbildung & Zertifikate',
+        languages: 'Sprachen',
+        responsibilities: 'Aufgaben',
+        notableProjects: 'Wichtige Projekte',
+        achievements: 'Erfolge',
+        categories: {
+            Software: 'Software',
+            Professional: 'Fachlich',
+            Strengths: 'Stärken',
+        },
+        downloadPdf: 'PDF herunterladen',
+    },
+};
 
 const CATEGORY_ICONS = {
     Software: <BuildIcon sx={{ fontSize: 16 }} />,
@@ -107,9 +145,10 @@ function TimelineSubsection({ label, children }) {
     );
 }
 
-function TimelineItem({ period, title, subtitle, location, responsibilities, notableProjects, achievements }) {
+function TimelineItem({ period, title, subtitle, location, responsibilities, notableProjects, achievements, labels }) {
     const hasProjects = notableProjects && notableProjects.length > 0;
     const hasAchievements = achievements && achievements.length > 0;
+    const hasRightColumn = hasProjects || hasAchievements;
     return (
         <Box className="avoid-break" sx={{ position: 'relative', pl: 3, pb: 2.5, breakInside: 'avoid' }}>
             <Box
@@ -150,37 +189,57 @@ function TimelineItem({ period, title, subtitle, location, responsibilities, not
                     </Box>
                 )}
             </Typography>
-            {responsibilities && (
-                <TimelineSubsection label="Responsibilities">
-                    <Typography variant="body2" sx={{ fontSize: '0.875rem', lineHeight: 1.5 }}>
-                        {responsibilities}
-                    </Typography>
-                </TimelineSubsection>
-            )}
-            {hasProjects && (
-                <TimelineSubsection label="Notable projects">
-                    <Box
-                        component="ul"
-                        sx={{ pl: 2.5, m: 0, '& li': { fontSize: '0.875rem', lineHeight: 1.5 } }}
-                    >
-                        {notableProjects.map((p, i) => (
-                            <li key={i}>{p}</li>
-                        ))}
+            <Box
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: {
+                        xs: '1fr',
+                        md: hasRightColumn ? '1fr 1fr' : '1fr',
+                    },
+                    columnGap: 3,
+                    '@media print': {
+                        gridTemplateColumns: hasRightColumn ? '1fr 1fr' : '1fr',
+                    },
+                }}
+            >
+                <Box>
+                    {responsibilities && (
+                        <TimelineSubsection label={labels?.responsibilities ?? 'Responsibilities'}>
+                            <Typography variant="body2" sx={{ fontSize: '0.875rem', lineHeight: 1.5 }}>
+                                {responsibilities}
+                            </Typography>
+                        </TimelineSubsection>
+                    )}
+                </Box>
+                {hasRightColumn && (
+                    <Box>
+                        {hasProjects && (
+                            <TimelineSubsection label={labels?.notableProjects ?? 'Notable projects'}>
+                                <Box
+                                    component="ul"
+                                    sx={{ pl: 2.5, m: 0, '& li': { fontSize: '0.875rem', lineHeight: 1.5 } }}
+                                >
+                                    {notableProjects.map((p, i) => (
+                                        <li key={i}>{p}</li>
+                                    ))}
+                                </Box>
+                            </TimelineSubsection>
+                        )}
+                        {hasAchievements && (
+                            <TimelineSubsection label={labels?.achievements ?? 'Achievements'}>
+                                <Box
+                                    component="ul"
+                                    sx={{ pl: 2.5, m: 0, '& li': { fontSize: '0.875rem', lineHeight: 1.5 } }}
+                                >
+                                    {achievements.map((a, i) => (
+                                        <li key={i}>{a}</li>
+                                    ))}
+                                </Box>
+                            </TimelineSubsection>
+                        )}
                     </Box>
-                </TimelineSubsection>
-            )}
-            {hasAchievements && (
-                <TimelineSubsection label="Achievements">
-                    <Box
-                        component="ul"
-                        sx={{ pl: 2.5, m: 0, '& li': { fontSize: '0.875rem', lineHeight: 1.5 } }}
-                    >
-                        {achievements.map((a, i) => (
-                            <li key={i}>{a}</li>
-                        ))}
-                    </Box>
-                </TimelineSubsection>
-            )}
+                )}
+            </Box>
         </Box>
     );
 }
@@ -258,12 +317,12 @@ function SkillBar({ label, level }) {
     );
 }
 
-function SkillCategory({ category, items }) {
+function SkillCategory({ category, items, label }) {
     const hasLevels = items.some((i) => typeof i.level === 'number');
     return (
         <Box sx={{ mb: 2.5, minWidth: 0, width: '100%', overflow: 'hidden' }}>
             <SectionTitle icon={CATEGORY_ICONS[category] ?? <BuildIcon sx={{ fontSize: 16 }} />}>
-                {category}
+                {label ?? category}
             </SectionTitle>
             {hasLevels ? (
                 items.map((it) => <SkillBar key={it.name} label={it.name} level={it.level ?? 0} />)
@@ -314,8 +373,26 @@ function LanguageRow({ label, level, cefr }) {
 
 /* ---------------- Page ---------------- */
 
-export default function ResumePage({ data = resumeData }) {
-    const { personal, languages, skills, experience, education } = data;
+export default function ResumePage({ data }) {
+    const [locale, setLocale] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const saved = window.localStorage.getItem('resume.locale');
+            if (saved && DATA_BY_LOCALE[saved]) return saved;
+        }
+        return 'en';
+    });
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.localStorage.setItem('resume.locale', locale);
+            document.documentElement.lang = locale;
+        }
+    }, [locale]);
+
+    const activeData = data ?? DATA_BY_LOCALE[locale] ?? resumeDataEn;
+    const t = UI_STRINGS[locale] ?? UI_STRINGS.en;
+
+    const { personal, languages, skills, experience, education } = activeData;
     const { contact } = personal;
 
     const theme = useTheme();
@@ -351,7 +428,20 @@ export default function ResumePage({ data = resumeData }) {
         setPdfBusy(true);
         try {
             const { exportResumePdf } = await import('./pdf/exportResumePdf.jsx');
-            await exportResumePdf({ data, theme, photoUrl, qrDataUrl });
+            await exportResumePdf({
+                data: activeData,
+                theme,
+                photoUrl,
+                qrDataUrl,
+                strings: {
+                    ...t,
+                    pageOf:
+                        locale === 'de'
+                            ? (n, total) => `Seite ${n} von ${total}`
+                            : (n, total) => `Page ${n} of ${total}`,
+                },
+                locale,
+            });
         } catch (err) {
             console.error('PDF export failed', err);
         } finally {
@@ -368,6 +458,47 @@ export default function ResumePage({ data = resumeData }) {
                 flexDirection: 'column',
             }}
         >
+            {/* Language selector (hidden in print) */}
+            <Box
+                className="no-print"
+                sx={{
+                    position: 'fixed',
+                    top: 16,
+                    right: 16,
+                    zIndex: 1300,
+                }}
+            >
+                <ToggleButtonGroup
+                    value={locale}
+                    exclusive
+                    size="small"
+                    onChange={(_, next) => next && setLocale(next)}
+                    aria-label="language"
+                    sx={{
+                        bgcolor: 'rgba(0,0,0,0.55)',
+                        backdropFilter: 'blur(6px)',
+                        borderRadius: 999,
+                        '& .MuiToggleButton-root': {
+                            color: 'rgba(255,255,255,0.75)',
+                            border: 'none',
+                            px: 1.6,
+                            py: 0.4,
+                            fontWeight: 700,
+                            fontSize: '0.72rem',
+                            letterSpacing: 1.2,
+                            borderRadius: 999,
+                            '&.Mui-selected': {
+                                bgcolor: 'accent.main',
+                                color: 'accent.contrastText',
+                                '&:hover': { bgcolor: 'accent.main' },
+                            },
+                        },
+                    }}
+                >
+                    <ToggleButton value="en" aria-label="English">EN</ToggleButton>
+                    <ToggleButton value="de" aria-label="Deutsch">DE</ToggleButton>
+                </ToggleButtonGroup>
+            </Box>
             {/* ============ HERO (full-bleed) ============ */}
             <Box
                 sx={{
@@ -518,12 +649,17 @@ export default function ResumePage({ data = resumeData }) {
                     }}
                 >
                     {skills?.map((group) => (
-                        <SkillCategory key={group.category} category={group.category} items={group.items} />
+                        <SkillCategory
+                            key={group.category}
+                            category={group.category}
+                            items={group.items}
+                            label={t.categories[group.category] ?? group.category}
+                        />
                     ))}
                     {languages && languages.length > 0 && (
                         <Box sx={{ minWidth: 0 }}>
                             <SectionTitle icon={<TranslateIcon sx={{ fontSize: 16 }} />}>
-                                Languages
+                                {t.languages}
                             </SectionTitle>
                             {languages.map((l) => (
                                 <LanguageRow key={l.name} label={l.name} level={l.level} cefr={l.cefr} />
@@ -542,14 +678,14 @@ export default function ResumePage({ data = resumeData }) {
                         mx: 'auto',
                         px: L.bandPadX,
                         py: L.bandPadY,
-                        display: 'grid',
-                        gridTemplateColumns: { xs: '1fr', md: L.experienceEducationColumns },
-                        gap: { xs: 4, md: 6 },
-                        '@media print': { gridTemplateColumns: L.experienceEducationColumns, gap: 32, py: 24 },
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: { xs: 4, md: 5 },
+                        '@media print': { gap: 24, py: 24 },
                     }}
                 >
                     <Box>
-                        <SectionTitle icon={<WorkIcon sx={{ fontSize: 16 }} />}>Work experience</SectionTitle>
+                        <SectionTitle icon={<WorkIcon sx={{ fontSize: 16 }} />}>{t.workExperience}</SectionTitle>
                         {experience.map((e, idx) => (
                             <TimelineItem
                                 key={idx}
@@ -560,13 +696,14 @@ export default function ResumePage({ data = resumeData }) {
                                 responsibilities={e.responsibilities}
                                 notableProjects={e.notableProjects}
                                 achievements={e.achievements}
+                                labels={t}
                             />
                         ))}
                     </Box>
 
                     <Box>
                         <SectionTitle icon={<SchoolIcon sx={{ fontSize: 16 }} />}>
-                            Education & Certificates
+                            {t.education}
                         </SectionTitle>
                         {education.map((e, idx) => (
                             <EducationItem
@@ -589,7 +726,7 @@ export default function ResumePage({ data = resumeData }) {
                 spacing={1.5}
                 sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1300 }}
             >
-                <Tooltip title="Download PDF (custom layout)" placement="left">
+                <Tooltip title={t.downloadPdf} placement="left">
                     <Fab
                         color="primary"
                         aria-label="download pdf"
