@@ -92,8 +92,8 @@ function makeSheet(c) {
             fontFamily: 'Helvetica',
             fontSize: 9.5,
             lineHeight: 1.4,
-            paddingTop: 32,
-            paddingBottom: 32,
+            paddingTop: 48,
+            paddingBottom: 48,
         },
 
         /* HERO */
@@ -101,7 +101,7 @@ function makeSheet(c) {
             flexDirection: 'row',
             backgroundColor: c.heroBg,
             color: c.heroFg,
-            marginTop: -32, // cancel Page paddingTop so hero bleeds to the top edge
+            marginTop: -48, // cancel Page paddingTop so hero bleeds to the top edge
             position: 'relative',
         },
         heroLightener: {
@@ -309,6 +309,17 @@ function makeSheet(c) {
             width: 1,
             backgroundColor: 'rgba(0,0,0,0.12)',
         },
+        // Small upward stub above the dot. Rendered on every non-first item so
+        // that when wrap={false} pushes an item to a new page, this stub sits
+        // in the new page's top padding and signals a continued timeline.
+        timelineLineTop: {
+            position: 'absolute',
+            left: 2.5,
+            top: -8,
+            height: 11,
+            width: 1,
+            backgroundColor: 'rgba(0,0,0,0.12)',
+        },
         period: {
             color: c.accentSoft,
             fontFamily: 'Helvetica-Bold',
@@ -369,18 +380,12 @@ function makeSheet(c) {
             paddingLeft: 8,
         },
 
-        /* FOOTER */
-        footer: {
+        /* PAGE NUMBER (top-right, non-first pages only) */
+        pageNum: {
             position: 'absolute',
-            bottom: 20,
-            left: 32,
+            top: 24,
             right: 32,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-        },
-        footerText: {
-            fontSize: 7,
+            fontSize: 7.5,
             color: c.textSecondary,
             letterSpacing: 0.8,
         },
@@ -491,12 +496,14 @@ function TimelineItem({
     achievements,
     styles,
     labels,
+    isFirst,
 }) {
     const hasProjects = notableProjects && notableProjects.length > 0;
     const hasAchievements = achievements && achievements.length > 0;
     const hasRightColumn = hasProjects || hasAchievements;
     return (
         <View style={styles.timelineItem} wrap={false}>
+            {!isFirst && <View style={styles.timelineLineTop} />}
             <View style={styles.timelineDot} />
             <View style={styles.timelineLine} />
             <Text style={styles.period}>{period}</Text>
@@ -545,9 +552,10 @@ function TimelineItem({
     );
 }
 
-function EducationItem({ period, title, organization, location, description, styles }) {
+function EducationItem({ period, title, organization, location, description, styles, isFirst }) {
     return (
         <View style={styles.timelineItem} wrap={false}>
+            {!isFirst && <View style={styles.timelineLineTop} />}
             <View style={styles.timelineDot} />
             <View style={styles.timelineLine} />
             <Text style={styles.period}>{period}</Text>
@@ -563,7 +571,7 @@ function EducationItem({ period, title, organization, location, description, sty
 
 /* ---------------- document ---------------- */
 
-export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl, strings, locale }) {
+export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl, strings }) {
     const colors = buildPdfStyles(theme);
     const styles = makeSheet(colors);
     const { personal, languages, skills, experience, education } = data;
@@ -579,12 +587,6 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl, strin
         pageOf: (n, total) => `Page ${n} of ${total}`,
         categories: {},
     };
-
-    const today = new Date().toLocaleDateString(locale === 'de' ? 'de-DE' : 'en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-    });
 
     const contacts = [
         { kind: 'Phone', value: contact?.phone },
@@ -603,18 +605,18 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl, strin
         >
             <Page size="A4" style={styles.page}>
 
-                {/* FOOTER (repeats on every page) */}
-                <View style={styles.footer} fixed>
-                    <Text style={styles.footerText}>{today}</Text>
-                    <Text
-                        style={styles.footerText}
-                        render={({ pageNumber, totalPages }) =>
-                            t.pageOf
+                {/* PAGE NUMBER (top-right, hidden on page 1 so hero stays clean) */}
+                <Text
+                    style={styles.pageNum}
+                    fixed
+                    render={({ pageNumber, totalPages }) =>
+                        pageNumber > 1
+                            ? t.pageOf
                                 ? t.pageOf(pageNumber, totalPages)
                                 : `Page ${pageNumber} of ${totalPages}`
-                        }
-                    />
-                </View>
+                            : ''
+                    }
+                />
 
                 {/* HERO */}
                 <View style={styles.hero}>
@@ -685,7 +687,7 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl, strin
                                 {t.workExperience}
                             </SectionTitle>
                             {experience.length > 0 && (
-                                <TimelineItem {...experience[0]} styles={styles} labels={t} />
+                                <TimelineItem {...experience[0]} isFirst styles={styles} labels={t} />
                             )}
                         </View>
                         {experience.slice(1).map((e, i) => (
@@ -698,7 +700,7 @@ export default function ResumeDocument({ data, theme, photoUrl, qrDataUrl, strin
                                 {t.education}
                             </SectionTitle>
                             {education.length > 0 && (
-                                <EducationItem {...education[0]} styles={styles} />
+                                <EducationItem {...education[0]} isFirst styles={styles} />
                             )}
                         </View>
                         {education.slice(1).map((e, i) => (

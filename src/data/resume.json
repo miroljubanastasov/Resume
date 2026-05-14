@@ -3,7 +3,7 @@
         "fullName": "Miroljub Anastasov",
         "title": "ARCHITECT",
         "photo": "Miroljub Photo.jpg",
-        "summary": "Architect and computational designer with 15 years of experience leading multidisciplinary teams and delivering complex projects across various sectors. Combines design leadership with advanced expertise in BIM, computational design, and workflow automation using Revit, Rhino, Grasshopper, Python, and C#. Proven track record in concept design, design development, and digital innovation that improves project quality, efficiency, and delivery outcomes.",
+        "summary": "Architect with 10+ years of experience leading multidisciplinary teams on complex projects across diverse sectors. Combines strong design leadership with deep technical expertise in computational design, and workflow automation through Revit, Rhino, Grasshopper, Python, and C#. Consistently delivers measurable gains in project quality, efficiency, and outcomes by integrating concept design, design development, and digital innovation.",
         "contact": {
             "phone": "+49 162 950 22 40",
             "email": "miroljub.a@gmail.com",
@@ -114,11 +114,13 @@
             "title": "Principal Architect / Advanced Technology Lead",
             "organization": "Dbom",
             "location": "Remote, Germany",
-            "responsibilities": "Lead multidisciplinary design and BIM teams across international projects, define delivery strategies, and drive the adoption of advanced technology across design workflows. Oversee BIM coordination, develop computational design solutions for complex master plan and retail projects, and support optimization, automation, and quality control from concept through delivery.",
+            "responsibilities": "Initialising and leading the architectural design of international projects across multiple sectors. Building the computational design and digital innovation capabilities of the practice, including developing custom tools and workflows that integrate concept design, design development, digital delivery and automation. Collaborating with architects, clients, and consultants to drive design excellence and project success through innovative use of technology.",
             "notableProjects": [
-                "Renovation BIM modeling for Berlin Stadtbibliothek, Germany, leading the BIM and architectural team.",
-                "Computational design and design optimization consultancy for master plan components in the Trojena mountain development in Saudi Arabia.",
-                "Computational design and design optimization for a large retail project in Dubai, UAE."
+                "Renovation BIM modeling for Berlin City Library, Germany, leading the BIM and architectural team.",
+                "Master plan project in Abu Dhabi, UAE",
+                "Computational design and design optimization consultancy for master plan components of the Trojena mountain development in Saudi Arabia.",
+                "Computational design and design optimization for a large retail project in Dubai, UAE.",
+                "System design and concept design of an automated housing platform startup."
             ],
             "achievements": []
         },
@@ -127,12 +129,13 @@
             "title": "Principal Architect / Computational Designer",
             "organization": "AXXIS",
             "location": "Serbia",
-            "responsibilities": "Led concept design and design development for mixed-use, master plan, and residential projects, coordinating architects, clients, and consultants throughout all project stages. Developed computational design and scripting workflows to support design optimization, automate repetitive tasks, and improve efficiency, accuracy, and overall design quality.",
+            "responsibilities": "Led concept design and design development for mixed-use, master plan, and residential projects, coordinating architects, clients, and consultants across every project stage. Built computational design and scripting workflows that optimized designs, automated repetitive tasks, and delivered measurable gains in efficiency, accuracy, and overall design quality. Mentoring consultancy on computational design.",
             "notableProjects": [
                 "Successful competition entry for a major government master plan project in Abu Dhabi, UAE.",
                 "Concept design of a mixed-use development in Abu Dhabi, UAE.",
-                "Computational design and design optimization consultancy for master plan components in the Trojena mountain development in Saudi Arabia.",
-                "Concept design and design development of several private residential projects in Dubai, UAE."
+                "Computational design and design optimization consultancy for master plan components of the Trojena mountain development in Saudi Arabia.",
+                "Concept design and design development of several private residential projects in Dubai, UAE.",
+                "Computational design mentoring of a large construction company engineering staff."
             ],
             "achievements": []
         },
@@ -141,12 +144,13 @@
             "title": "Architect, Senior Associate",
             "organization": "Aedas",
             "location": "Dubai, United Arab Emirates",
-            "responsibilities": "Led concept and computational design work for large-scale mixed-use, hospitality, and infrastructure projects across the Middle East. Managed design teams, coordinated with clients and consultants, and translated competition-winning concepts into robust design development packages.",
+            "responsibilities": "Led concept design for large-scale mixed-use, hospitality, and infrastructure projects across the Middle East. Managed design teams, coordinated with clients and consultants, and translated competition-winning concepts into robust, fully resolved design packages ready for delivery. In charge of implementing computational design and BIM workflows that improved design quality, efficiency, and project outcomes across multiple projects.",
             "notableProjects": [
                 "Winning competition design of the Ski Village mixed-use development in Saudi Arabia (255,000 m² GFA).",
                 "Design development of the Ski Village mixed-use development in Saudi Arabia (255,000 m² GFA).",
                 "Winning design of three hotel competitions in Saudi Arabia (~20,000 m² each) and design development.",
-                "Design of the award-winning, LEED Platinum petrol station project at Dubai EXPO."
+                "Design of the award-winning, LEED Platinum petrol station project at Dubai EXPO.",
+                "Interior design of the Dubai Metro Station, Dubai, UAE (10,000 m²). Public infrastructure project."
             ],
             "achievements": []
         },
@@ -155,7 +159,7 @@
             "title": "Architect",
             "organization": "Shape Architects Practice and Research",
             "location": "Dubai, United Arab Emirates",
-            "responsibilities": "Contributed to concept design, computational design, and BIM development across cultural, educational, and institutional projects. Prepared client-facing presentations, supported design coordination, and developed digital models to advance projects from early design through presentation.",
+            "responsibilities": "Contributed to concept design, computational design, and BIM development for cultural, educational, and institutional projects. Prepared client-facing presentations, supported design coordination, and built digital models that carried projects from early concept through final presentation.",
             "notableProjects": [
                 "Emirates Diplomatic Academy, Abu Dhabi, UAE (18,000 m²). Government education facility.",
                 "Barjeel Gallery, Sharjah, UAE (2,000 m²). Art gallery.",
@@ -173,24 +177,24 @@
         },
         {
             "period": "2016",
-            "title": "Certified Revit Professional",
+            "title": "Certified Professional: Revit Architecture 2015",
             "organization": "Autodesk",
             "location": "Dubai, United Arab Emirates",
-            "description": ""
+            "description": "Professional-level certification validating advanced proficiency in Revit Architecture: modeling and materials, families and components, views, schedules, annotations, phases and design options, and collaborative worksharing workflows. Requires 400+ hours of production experience."
         },
         {
             "period": "2012",
-            "title": "Fachmann für erneuerbare Energiequellen",
+            "title": "Specialist for Renewable Energy Sources",
             "organization": "WIFI, Serbia",
             "location": "Belgrade, Serbia",
-            "description": ""
+            "description": "Vocational program (passed with distinction) covering renewable energy systems for buildings: solar thermal, photovoltaics, heat pumps, biomass, wind, rainwater harvesting, and energy-efficient building technology."
         },
         {
             "period": "2012",
-            "title": "Fachmann für Bau der Niedrigenergie- und Passivhäuser",
+            "title": "Specialist for Low-Energy and Passive House Construction",
             "organization": "WIFI, Serbia",
             "location": "Belgrade, Serbia",
-            "description": ""
+            "description": "Vocational program (passed with distinction) covering low-energy and passive house design, envelope detailing, thermal bridge mitigation, energy retrofitting, and energy performance certification."
         }
     ]
 }

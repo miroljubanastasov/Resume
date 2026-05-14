@@ -3,7 +3,7 @@
         "fullName": "Miroljub Anastasov",
         "title": "ARCHITEKT",
         "photo": "Miroljub Photo.jpg",
-        "summary": "Architekt und computergestützter Designer mit 15 Jahren Erfahrung in der Leitung multidisziplinärer Teams und der Umsetzung komplexer Projekte in verschiedenen Sektoren. Verbindet Design-Leadership mit fundiertem Fachwissen in BIM, computergestütztem Design und Workflow-Automatisierung mit Revit, Rhino, Grasshopper, Python und C#. Nachgewiesene Erfolge in Konzeptentwurf, Entwurfsplanung und digitaler Innovation, die Projektqualität, Effizienz und Ergebnisse verbessern.",
+        "summary": "Architekt mit über 10 Jahren Erfahrung in der Leitung multidisziplinärer Teams bei komplexen Projekten in verschiedenen Sektoren. Verbindet ausgeprägte Design-Leadership mit fundiertem Fachwissen in computergestütztem Design und Workflow-Automatisierung mit Revit, Rhino, Grasshopper, Python und C#. Erzielt durchgängig messbare Verbesserungen in Projektqualität, Effizienz und Ergebnissen durch die Integration von Konzeptentwurf, Entwurfsplanung und digitaler Innovation.",
         "contact": {
             "phone": "+49 162 950 22 40",
             "email": "miroljub.a@gmail.com",
@@ -114,11 +114,13 @@
             "title": "Leitender Architekt / Leiter Advanced Technology",
             "organization": "Dbom",
             "location": "Remote, Deutschland",
-            "responsibilities": "Leitung multidisziplinärer Design- und BIM-Teams in internationalen Projekten, Definition von Lieferstrategien und Förderung der Einführung fortschrittlicher Technologien in Entwurfsabläufen. Verantwortlich für BIM-Koordination, Entwicklung computergestützter Designlösungen für komplexe Masterplan- und Retailprojekte sowie Unterstützung bei Optimierung, Automatisierung und Qualitätskontrolle vom Konzept bis zur Übergabe.",
+            "responsibilities": "Initiierung und Leitung der architektonischen Gestaltung internationaler Projekte in verschiedenen Sektoren. Aufbau der Kompetenzen für computergestütztes Design und digitale Innovation im Unternehmen, einschließlich der Entwicklung individueller Tools und Workflows, die Konzeptentwurf, Entwurfsplanung, digitale Lieferung und Automatisierung integrieren. Zusammenarbeit mit Architekten, Bauherren und Fachplanern, um durch innovativen Technologieeinsatz Design-Exzellenz und Projekterfolg voranzutreiben.",
             "notableProjects": [
                 "Sanierungs-BIM-Modellierung für die Stadtbibliothek Berlin, Deutschland, mit Leitung des BIM- und Architekturteams.",
+                "Masterplanprojekt in Abu Dhabi, VAE.",
                 "Beratung zu computergestütztem Design und Designoptimierung für Masterplan-Komponenten der Trojena Bergentwicklung in Saudi-Arabien.",
-                "Computergestütztes Design und Designoptimierung für ein großes Retailprojekt in Dubai, VAE."
+                "Computergestütztes Design und Designoptimierung für ein großes Retailprojekt in Dubai, VAE.",
+                "Systemdesign und Konzeptentwurf eines Startups für eine automatisierte Wohnbauplattform."
             ],
             "achievements": []
         },
@@ -127,12 +129,13 @@
             "title": "Leitender Architekt / Computational Designer",
             "organization": "AXXIS",
             "location": "Serbien",
-            "responsibilities": "Leitung von Konzeptentwurf und Entwurfsplanung für Mischnutzungs-, Masterplan- und Wohnprojekte sowie Koordination von Architekten, Bauherren und Fachplanern in allen Projektphasen. Entwicklung computergestützter Design- und Scripting-Workflows zur Designoptimierung, Automatisierung wiederkehrender Aufgaben und Verbesserung von Effizienz, Genauigkeit und Designqualität.",
+            "responsibilities": "Leitung von Konzeptentwurf und Entwurfsplanung für Mischnutzungs-, Masterplan- und Wohnprojekte sowie Koordination von Architekten, Bauherren und Fachplanern in allen Projektphasen. Aufbau computergestützter Design- und Scripting-Workflows zur Designoptimierung, Automatisierung wiederkehrender Aufgaben und für messbare Verbesserungen in Effizienz, Genauigkeit und Designqualität. Beratung und Mentoring im Bereich computergestütztes Design.",
             "notableProjects": [
                 "Erfolgreiche Wettbewerbseingabe für ein bedeutendes Regierungs-Masterplanprojekt in Abu Dhabi, VAE.",
                 "Konzeptentwurf einer Mischnutzungsentwicklung in Abu Dhabi, VAE.",
                 "Beratung zu computergestütztem Design und Designoptimierung für Masterplan-Komponenten der Trojena Bergentwicklung in Saudi-Arabien.",
-                "Konzeptentwurf und Entwurfsplanung mehrerer privater Wohnprojekte in Dubai, VAE."
+                "Konzeptentwurf und Entwurfsplanung mehrerer privater Wohnprojekte in Dubai, VAE.",
+                "Mentoring im Bereich computergestütztes Design für Ingenieurteams eines großen Bauunternehmens."
             ],
             "achievements": []
         },
@@ -141,12 +144,13 @@
             "title": "Architekt, Senior Associate",
             "organization": "Aedas",
             "location": "Dubai, Vereinigte Arabische Emirate",
-            "responsibilities": "Leitung von Konzept- und computergestützten Designarbeiten für großmaßstäbliche Mischnutzungs-, Hotel- und Infrastrukturprojekte im Nahen Osten. Führung von Designteams, Koordination mit Bauherren und Fachplanern sowie Überführung von Wettbewerbskonzepten in belastbare Entwurfspakete.",
+            "responsibilities": "Leitung von Konzept- und computergestützten Designarbeiten für großmaßstäbliche Mischnutzungs-, Hotel- und Infrastrukturprojekte im Nahen Osten. Führung von Designteams, Koordination mit Bauherren und Fachplanern sowie Überführung von Wettbewerbskonzepten in belastbare, vollständig ausgearbeitete Entwurfspakete bis zur Ausführungsreife. Verantwortlich für die Einführung computergestützter Design- und BIM-Workflows, die Designqualität, Effizienz und Projektergebnisse über mehrere Projekte hinweg verbesserten.",
             "notableProjects": [
                 "Wettbewerbsgewinn für die Mischnutzungsentwicklung Ski Village in Saudi-Arabien (255.000 m² BGF).",
                 "Entwurfsplanung der Mischnutzungsentwicklung Ski Village in Saudi-Arabien (255.000 m² BGF).",
                 "Gewinn von drei Hotelwettbewerben in Saudi-Arabien (~20.000 m² je) sowie Entwurfsplanung.",
-                "Entwurf der preisgekrönten LEED-Platinum-Tankstelle auf der EXPO Dubai."
+                "Entwurf der preisgekrönten LEED-Platinum-Tankstelle auf der EXPO Dubai.",
+                "Innenarchitektur der Dubai Metro Station, Dubai, VAE (10.000 m²). Öffentliches Infrastrukturprojekt."
             ],
             "achievements": []
         },
@@ -173,24 +177,24 @@
         },
         {
             "period": "2016",
-            "title": "Certified Revit Professional",
+            "title": "Certified Professional: Revit Architecture 2015",
             "organization": "Autodesk",
             "location": "Dubai, Vereinigte Arabische Emirate",
-            "description": ""
+            "description": "Zertifizierung auf Professional-Niveau, die fortgeschrittene Kenntnisse in Revit Architecture bestätigt: Modellierung und Materialien, Familien und Bauteile, Ansichten, Bauteillisten, Beschriftungen, Phasen und Entwurfsoptionen sowie kollaborative Worksharing-Workflows. Voraussetzung: 400+ Stunden Praxiserfahrung."
         },
         {
             "period": "2012",
             "title": "Fachmann für erneuerbare Energiequellen",
             "organization": "WIFI, Serbien",
             "location": "Belgrad, Serbien",
-            "description": ""
+            "description": "Fachausbildung (mit sehr gutem Erfolg bestanden) zu erneuerbaren Energiesystemen für Gebäude: Solarthermie, Photovoltaik, Wärmepumpen, Biomasse, Windenergie, Regenwassernutzung und energieeffiziente Gebäudetechnik."
         },
         {
             "period": "2012",
             "title": "Fachmann für Bau der Niedrigenergie- und Passivhäuser",
             "organization": "WIFI, Serbien",
             "location": "Belgrad, Serbien",
-            "description": ""
+            "description": "Fachausbildung (mit sehr gutem Erfolg bestanden) zu Planung von Niedrigenergie- und Passivhäusern, Hüllendetails, Vermeidung von Wärmebrücken, energetischer Sanierung und Energieausweis."
         }
     ]
 }

@@ -514,7 +514,7 @@ export default function ResumePage({ data }) {
                         maxWidth: L.contentMaxWidth,
                         mx: 'auto',
                         display: 'grid',
-                        gridTemplateColumns: { xs: '1fr', sm: '1.15fr 1fr' },
+                        gridTemplateColumns: { xs: '1fr', sm: '1.5fr 1fr' },
                         minHeight: L.heroMinHeight,
                         '@media print': { gridTemplateColumns: '1.15fr 1fr', minHeight: 0 },
                     }}
